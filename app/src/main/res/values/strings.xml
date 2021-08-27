@@ -66,6 +66,17 @@
         <item>30</item>
         <item>23</item>
     </string-array>
+
+    <string-array name="income_titles">
+        <item>Salary</item>
+        <item>Side Hustle</item>
+    </string-array>
+
+    <string-array name="income_amounts">
+        <item>Ksh. 200000</item>
+        <item>Ksh. 10000</item>
+    </string-array>
+
     <string name="title_activity_landing">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>

@@ -1,5 +1,6 @@
 package com.cyprian.moneymanager;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -94,6 +95,10 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        if (id == R.id.income) {
+            Intent intent = new Intent(MainActivity.this, IncomeActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
