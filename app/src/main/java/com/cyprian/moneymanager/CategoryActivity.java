@@ -3,7 +3,6 @@ package com.cyprian.moneymanager;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,45 +11,30 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class IncomeActivity extends AppCompatActivity {
-
-    private ArrayList<Income> incomeArrayList;
-    private IncomeAdapter incomeAdapter;
+public class CategoryActivity extends AppCompatActivity {
+    private ArrayList<Category> categoryArrayList;
+    private CategoryAdapter categoryAdapter;
     BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_income);
+        setContentView(R.layout.activity_category);
 
         Toolbar toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab_income);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent = new Intent(IncomeActivity.this, IncomeExpenseActivity.class);
-//                startActivity(intent);
-                Fragment fragment = new AddIncomeFragment();
-//                getSupportFragmentManager().beginTransaction().replace(R.i)
-            }
-        });
-
         bottomNavigationView = findViewById(R.id.bottom_nav);
 
-        bottomNavigationView.setSelectedItemId(R.id.income);
+        bottomNavigationView.setSelectedItemId(R.id.categories);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
@@ -58,16 +42,16 @@ public class IncomeActivity extends AppCompatActivity {
 
                 switch (id) {
                     case R.id.dashboard:
-                        Intent intent2 = new Intent(IncomeActivity.this, DashboardActivity.class);
+                        Intent intent2 = new Intent(CategoryActivity.this, DashboardActivity.class);
                         startActivity(intent2);
                         break;
-                    case R.id.categories:
-                        Intent intent = new Intent(IncomeActivity.this, CategoryActivity.class);
+                    case R.id.expense:
+                        Intent intent = new Intent(CategoryActivity.this, MainActivity.class);
                         startActivity(intent);
                         break;
 
-                    case R.id.expense:
-                        Intent intent1 = new Intent(IncomeActivity.this, MainActivity.class);
+                    case R.id.income:
+                        Intent intent1 = new Intent(CategoryActivity.this, IncomeActivity.class);
                         startActivity(intent1);
                         break;
                 }
@@ -75,46 +59,46 @@ public class IncomeActivity extends AppCompatActivity {
             }
         });
 
+        //Floating Action Button
+        FloatingActionButton fab = findViewById(R.id.fab_category);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CategoryActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         //Initializing the recycler view
-        RecyclerView recyclerView = findViewById(R.id.recycler_income);
+        RecyclerView recyclerView = findViewById(R.id.recycler_category);
         //setting the layout manager for the recycler view
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //Initializing the array list that will contain the data
-        incomeArrayList = new ArrayList<>();
+        categoryArrayList = new ArrayList<>();
         //Initializing the dailyAdapter
-        incomeAdapter = new IncomeAdapter(this, incomeArrayList);
+        categoryAdapter = new CategoryAdapter(this, categoryArrayList);
         //Setting the adapter
-        recyclerView.setAdapter(incomeAdapter);
+        recyclerView.setAdapter(categoryAdapter);
 
         //Getting the data
         initializeData();
-
     }
 
     private void initializeData() {
         //Getting the data created in strings.xml
-        String[] incomeTitles = getResources().getStringArray(R.array.income_titles);
-        String[] incomeAmounts = getResources().getStringArray(R.array.income_amounts);
+        String[] categoryTitles = getResources().getStringArray(R.array.category_titles);
+        String[] categoryAmounts = getResources().getStringArray(R.array.category_amounts);
 
         //clearing existing data to avoid duplication
-        incomeArrayList.clear();
+        categoryArrayList.clear();
 
-        for (int i = 0; i < incomeTitles.length; i++) {
-            incomeArrayList.add(new Income(incomeTitles[i], incomeAmounts[i]));
+        for (int i = 0; i < categoryTitles.length; i++) {
+            categoryArrayList.add(new Category(categoryTitles[i], categoryAmounts[i]));
         }
 
         //Notify the adapter of the change in data set
-        incomeAdapter.notifyDataSetChanged();
+        categoryAdapter.notifyDataSetChanged();
 
-        //Floating Action Button
-        FloatingActionButton fab = findViewById(R.id.fab_income);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(IncomeActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
@@ -141,5 +125,4 @@ public class IncomeActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

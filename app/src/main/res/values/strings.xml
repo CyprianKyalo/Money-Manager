@@ -77,6 +77,30 @@
         <item>Ksh. 10000</item>
     </string-array>
 
+    <string-array name="category_titles">
+        <item>Shopping</item>
+        <item>Photography</item>
+        <item>Cooking</item>
+        <item>Shopping</item>
+        <item>Photography</item>
+        <item>Cooking</item>
+        <item>Shopping</item>
+        <item>Photography</item>
+        <item>Cooking</item>
+    </string-array>
+
+    <string-array name="category_amounts">
+        <item>Ksh. 2000</item>
+        <item>Ksh. 3000</item>
+        <item>Ksh. 400</item>
+        <item>Ksh. 2000</item>
+        <item>Ksh. 3000</item>
+        <item>Ksh. 400</item>
+        <item>Ksh. 2000</item>
+        <item>Ksh. 3000</item>
+        <item>Ksh. 400</item>
+    </string-array>
+
     <string name="title_activity_landing">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>

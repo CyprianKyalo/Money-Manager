@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DashboardActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#0094EA"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        app:itemIconTint="@android:color/white"
+        app:itemTextColor="@android:color/white"
+        app:menu="@menu/nav_bottom"
+        android:background="@android:color/holo_blue_light">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/dash_income"
+        android:layout_width="135dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/tool_bar"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:backgroundTint="#8218A5"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            >
+
+            <TextView
+                android:id="@+id/inco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Income"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp"
+                android:textSize="18dp"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ksh. 200000"
+                android:layout_below="@id/inco"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/white"/>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="135dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/tool_bar"
+        android:layout_toEndOf="@id/dash_income"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:backgroundTint="#7d0aa3"
+        android:layout_toRightOf="@id/dash_income"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:id="@+id/exp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Expense"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp"
+                android:textSize="18dp"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ksh. 200000"
+                android:layout_below="@id/exp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/white"/>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Categories"
+        android:layout_below="@id/dash_income"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/centabel_book"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="normal"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/dashboard_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/dash_income"
+        android:layout_marginTop="50dp"
+        android:layout_above="@id/bottom_nav"/>
+
+</RelativeLayout>

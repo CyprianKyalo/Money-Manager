@@ -3,8 +3,10 @@ package com.cyprian.moneymanager;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
@@ -25,7 +27,10 @@ import com.google.android.material.tabs.TabLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.jetbrains.annotations.NotNull;
+
 public class MainActivity extends AppCompatActivity {
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,34 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+
+        bottomNavigationView = findViewById(R.id.bottom_nav);
+
+        bottomNavigationView.setSelectedItemId(R.id.expense);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+                int id = item.getItemId();
+
+                switch (id) {
+                    case R.id.dashboard:
+                        Intent intent2 = new Intent(MainActivity.this, DashboardActivity.class);
+                        startActivity(intent2);
+                        break;
+                    case R.id.categories:
+                        Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.income:
+                        Intent intent1 = new Intent(MainActivity.this, IncomeActivity.class);
+                        startActivity(intent1);
+                        break;
+                }
+                return false;
+            }
+        });
+
 
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_daily));
