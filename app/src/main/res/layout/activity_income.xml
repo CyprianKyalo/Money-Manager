@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".IncomeActivity"
+    >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/background_dark"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <TextView
+        android:id="@+id/inc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Income"
+        android:textStyle="bold"
+        android:fontFamily="@font/centabel_book"
+        android:textSize="20dp"
+        android:layout_below="@id/tool_bar"
+        android:layout_centerInParent="true"
+        android:layout_margin="8dp"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        app:itemIconTint="@android:color/white"
+        app:itemTextColor="@android:color/white"
+        app:menu="@menu/nav_bottom"
+        android:background="@android:color/holo_blue_light">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+<!--    <androidx.viewpager.widget.ViewPager-->
+<!--        android:id="@+id/view_pager"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_above="@id/bottom_nav"-->
+<!--        android:layout_below="@id/tool_bar"/>-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_income"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/inc"
+        android:layout_above="@id/bottom_nav"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_income"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottom_nav"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        android:layout_alignBottom="@id/recycler_income"
+        android:src="@drawable/ic_add"
+        android:onClick="fab"/>
+
+<!--    <Button-->
+
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:backgroundTint=""-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_above="@id/bottom_nav"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:layout_marginRight="5dp"-->
+<!--        android:theme="@style/ThemeOverlay.AppCompat.Light"-->
+<!--        android:layout_alignBottom="@id/recycler_income"-->
+<!--        android:onClick="fab"-->
+<!--        -->
+<!--        android:background="@drawable/ic_add"/>-->
+
+
+</RelativeLayout>
