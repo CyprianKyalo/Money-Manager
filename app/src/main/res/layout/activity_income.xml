@@ -66,6 +66,23 @@
         android:layout_marginBottom="5dp"
         android:theme="@style/ThemeOverlay.AppCompat.Light"
         android:layout_alignBottom="@id/recycler_income"
-        android:src="@drawable/ic_add"/>
+        android:src="@drawable/ic_add"
+        android:onClick="fab"/>
+
+<!--    <Button-->
+
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:backgroundTint=""-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_above="@id/bottom_nav"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:layout_marginRight="5dp"-->
+<!--        android:theme="@style/ThemeOverlay.AppCompat.Light"-->
+<!--        android:layout_alignBottom="@id/recycler_income"-->
+<!--        android:onClick="fab"-->
+<!--        -->
+<!--        android:background="@drawable/ic_add"/>-->
+
 
 </RelativeLayout>

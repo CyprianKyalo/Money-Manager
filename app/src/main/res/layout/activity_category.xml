@@ -65,6 +65,7 @@
         android:layout_marginBottom="5dp"
         android:theme="@style/ThemeOverlay.AppCompat.Light"
         android:layout_alignBottom="@id/recycler_category"
-        android:src="@drawable/ic_add"/>
+        android:src="@drawable/ic_add"
+        android:onClick="fab_cat"/>
 
 </RelativeLayout>

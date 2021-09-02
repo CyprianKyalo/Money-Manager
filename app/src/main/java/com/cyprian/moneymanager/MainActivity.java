@@ -138,4 +138,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void fab_exp(View view) {
+        Intent intent = new Intent(MainActivity.this, IncomeExpenseActivity.class);
+        startActivity(intent);
+    }
 }

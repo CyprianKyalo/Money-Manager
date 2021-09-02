@@ -37,16 +37,16 @@ public class IncomeActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab_income);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent = new Intent(IncomeActivity.this, IncomeExpenseActivity.class);
-//                startActivity(intent);
-                Fragment fragment = new AddIncomeFragment();
-//                getSupportFragmentManager().beginTransaction().replace(R.i)
-            }
-        });
+//        FloatingActionButton fab = findViewById(R.id.fab_income);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                Intent intent = new Intent(IncomeActivity.this, IncomeExpenseActivity.class);
+////                startActivity(intent);
+//                Fragment fragment = new AddIncomeFragment();
+////                getSupportFragmentManager().beginTransaction().replace(R.i)
+//            }
+//        });
 
         bottomNavigationView = findViewById(R.id.bottom_nav);
 
@@ -107,14 +107,14 @@ public class IncomeActivity extends AppCompatActivity {
         incomeAdapter.notifyDataSetChanged();
 
         //Floating Action Button
-        FloatingActionButton fab = findViewById(R.id.fab_income);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(IncomeActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+//        FloatingActionButton fab = findViewById(R.id.fab_income);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(IncomeActivity.this, MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override
@@ -142,4 +142,8 @@ public class IncomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void fab(View view) {
+        Intent intent = new Intent(IncomeActivity.this, IncomeExpenseActivity.class);
+        startActivity(intent);
+    }
 }

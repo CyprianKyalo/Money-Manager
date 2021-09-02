@@ -1,12 +1,18 @@
 package com.cyprian.moneymanager;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
+
+import org.jetbrains.annotations.NotNull;
 
 public class IncomeExpenseActivity extends AppCompatActivity {
 
@@ -47,5 +53,37 @@ public class IncomeExpenseActivity extends AppCompatActivity {
 
             }
         });
+
+//        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+//
+////        bottomNavigationView.setSelectedItemId(R.id.income);
+//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+//                int id = item.getItemId();
+//
+//                switch (id) {
+//                    case R.id.dashboard:
+//                        Intent intent2 = new Intent(IncomeExpenseActivity.this, DashboardActivity.class);
+//                        startActivity(intent2);
+//                        break;
+//                    case R.id.categories:
+//                        Intent intent = new Intent(IncomeExpenseActivity.this, CategoryActivity.class);
+//                        startActivity(intent);
+//                        break;
+//
+//                    case R.id.expense:
+//                        Intent intent1 = new Intent(IncomeExpenseActivity.this, MainActivity.class);
+//                        startActivity(intent1);
+//                        break;
+//
+//                    case R.id.income:
+//                        Intent intent3 = new Intent(IncomeExpenseActivity.this, IncomeActivity.class);
+//                        startActivity(intent3);
+//                        break;
+//                }
+//                return false;
+//            }
+//        });
     }
 }

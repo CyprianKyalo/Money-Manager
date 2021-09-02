@@ -60,14 +60,14 @@ public class CategoryActivity extends AppCompatActivity {
         });
 
         //Floating Action Button
-        FloatingActionButton fab = findViewById(R.id.fab_category);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CategoryActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+//        FloatingActionButton fab = findViewById(R.id.fab_category);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(CategoryActivity.this, MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         //Initializing the recycler view
         RecyclerView recyclerView = findViewById(R.id.recycler_category);
@@ -124,5 +124,10 @@ public class CategoryActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void fab_cat(View view) {
+        Intent intent = new Intent(CategoryActivity.this, AddCategoryActivity.class);
+        startActivity(intent);
     }
 }
