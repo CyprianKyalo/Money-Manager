@@ -11,22 +11,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="#000b0b"
+        android:background="@color/white"
+        app:titleTextColor="#6c2488"
+        app:title="Categories"
+        app:collapseIcon="@color/icon_color"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <TextView
-        android:id="@+id/cat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Categories"
-        android:fontFamily="@font/centabel_book"
-        android:layout_below="@id/tool_bar"
-        android:layout_centerInParent="true"
-        android:layout_margin="10dp"
-        android:textSize="20dp"
-        android:textStyle="bold"/>
+<!--    <TextView-->
+<!--        android:id="@+id/cat"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/tool_bar"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:layout_marginRight="10dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:fontFamily="@font/centabel_book"-->
+<!--        android:text="Categories"-->
+<!--        android:textSize="20dp"-->
+<!--        android:textStyle="bold" />-->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
@@ -34,10 +42,11 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
-        app:itemIconTint="@android:color/white"
-        app:itemTextColor="@android:color/white"
+        app:itemIconTint="@color/icon_color"
+        app:itemTextColor="@color/icon_color"
         app:menu="@menu/nav_bottom"
-        android:background="@android:color/holo_blue_light">
+        android:elevation="20dp"
+        android:background="@color/white">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
@@ -52,8 +61,8 @@
         android:id="@+id/recycler_category"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/cat"
-        android:layout_above="@id/bottom_nav"/>
+        android:layout_above="@id/bottom_nav"
+        android:layout_below="@id/tool_bar" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_category"
@@ -63,9 +72,12 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="5dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Light"
-        android:layout_alignBottom="@id/recycler_category"
+        android:background="@color/icon_color"
+        android:backgroundTint="@color/icon_color"
+        android:onClick="fab_cat"
         android:src="@drawable/ic_add"
-        android:onClick="fab_cat"/>
+        android:tint="@color/white"
+        app:backgroundTint="@color/white"
+        app:rippleColor="@color/white" />
 
 </RelativeLayout>
