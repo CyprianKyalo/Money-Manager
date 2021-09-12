@@ -11,7 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@android:color/background_dark"
+        android:background="@android:color/white"
+        app:titleTextColor="#6c2488"
+        app:title="Expenses"
+        app:collapseIcon="@color/icon_color"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
@@ -21,7 +24,9 @@
         android:layout_width="match_parent"
         android:layout_height="40sp"
         android:layout_below="@+id/tool_bar"
-        android:background="@android:color/holo_blue_bright"
+        android:background="@color/white"
+        app:tabTextColor="@color/icon_color"
+        app:tabSelectedTextColor="#3f194e"
         android:minHeight="20sp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
@@ -31,10 +36,11 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
-        app:itemIconTint="@android:color/white"
-        app:itemTextColor="@android:color/white"
+        app:itemIconTint="@color/icon_color"
+        app:itemTextColor="@color/icon_color"
         app:menu="@menu/nav_bottom"
-        android:background="@android:color/holo_blue_light">
+        android:elevation="20dp"
+        android:background="@color/white">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
@@ -50,9 +56,14 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/bottom_nav"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="5dp"
         android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/icon_color"
+        android:backgroundTint="@color/icon_color"
+        android:onClick="fab_exp"
         android:src="@drawable/ic_add"
-        android:onClick="fab_exp"/>
+        android:tint="@color/white"
+        app:backgroundTint="@color/white"
+        app:rippleColor="@color/white" />
 
 </RelativeLayout>

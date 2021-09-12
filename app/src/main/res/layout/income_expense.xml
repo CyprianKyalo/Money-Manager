@@ -9,7 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@android:color/background_dark"
+        android:background="@color/white"
+        app:titleTextColor="#6c2488"
+        app:collapseIcon="@color/icon_color"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
@@ -28,13 +30,15 @@
             android:layout_height="match_parent"
             android:layout_margin="8dp">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/income_expense_tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="40sp"
-            android:background="@android:color/holo_blue_bright"
-            android:minHeight="20sp"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/income_expense_tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:background="@color/white"
+                android:minHeight="20sp"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:tabSelectedTextColor="#3f194e"
+                app:tabTextColor="@color/icon_color" />
 
 
 
