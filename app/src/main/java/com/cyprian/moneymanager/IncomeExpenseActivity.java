@@ -5,17 +5,38 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.jetbrains.annotations.NotNull;
 
 public class IncomeExpenseActivity extends AppCompatActivity {
+
+    private EditText incomeName;
+    private EditText amount;
+    private Button sendIncome;
+
+    private DatabaseReference incomeRef;
+    private FirebaseAuth mAuth;
+    private ProgressDialog loader;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,37 +76,67 @@ public class IncomeExpenseActivity extends AppCompatActivity {
             }
         });
 
-//        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
-//
-////        bottomNavigationView.setSelectedItemId(R.id.income);
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-//                int id = item.getItemId();
-//
-//                switch (id) {
-//                    case R.id.dashboard:
-//                        Intent intent2 = new Intent(IncomeExpenseActivity.this, DashboardActivity.class);
-//                        startActivity(intent2);
-//                        break;
-//                    case R.id.categories:
-//                        Intent intent = new Intent(IncomeExpenseActivity.this, CategoryActivity.class);
-//                        startActivity(intent);
-//                        break;
-//
-//                    case R.id.expense:
-//                        Intent intent1 = new Intent(IncomeExpenseActivity.this, MainActivity.class);
-//                        startActivity(intent1);
-//                        break;
-//
-//                    case R.id.income:
-//                        Intent intent3 = new Intent(IncomeExpenseActivity.this, IncomeActivity.class);
-//                        startActivity(intent3);
-//                        break;
-//                }
-//                return false;
-//            }
-//        });
+        mAuth = FirebaseAuth.getInstance();
+        incomeRef = FirebaseDatabase.getInstance().getReference().child("income").child(mAuth.getCurrentUser().getUid());
+        loader = new ProgressDialog(this);
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.fragment_add_income, null);
+
+
+        incomeName = view.findViewById(R.id.income_name);
+        amount = view.findViewById(R.id.incomeAmount);
+        sendIncome = view.findViewById(R.id.button_add_income);
+
+        sendIncome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String incomename = incomeName.getText().toString().trim();
+                final String incomeAmt = amount.getText().toString().trim();
+
+                if (TextUtils.isEmpty(incomename)) {
+                    incomeName.setError("Income Name Required!");
+                    return;
+                }
+
+                else {
+                    loader.setMessage("Adding Income");
+                    loader.setCanceledOnTouchOutside(false);
+                    loader.show();
+
+                    Log.d("TAG", "Log message");
+
+                    String id = incomeRef.push().getKey();
+
+                    Income income = new Income(incomename, incomeAmt);
+                    incomeRef.child(id).setValue(income).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull @NotNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(IncomeExpenseActivity.this, "IIncome Added", Toast.LENGTH_SHORT).show();
+                            } else{
+                                Toast.makeText(IncomeExpenseActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                            }
+
+                            loader.dismiss();
+                        }
+                    });
+
+                }
+
+
+            }
+        });
     }
-    
+
+
+//    public void saveIncome(View view) {
+//        String incname = (String) incomeName.getText().toString();
+//        String incomeAmt = amount.getText().toString();
+//
+//                if (TextUtils.isEmpty(incname)) {
+//                    incomeName.setError("Income Name Required!");
+//                    return;
+//                }
+//    }
 }

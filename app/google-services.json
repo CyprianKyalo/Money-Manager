@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "470540540352",
-    "project_id": "money-manager-fe827",
-    "storage_bucket": "money-manager-fe827.appspot.com"
+    "project_number": "622748815637",
+    "project_id": "money-3cb6b",
+    "storage_bucket": "money-3cb6b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:470540540352:android:00f8ab7c301d3372889025",
+        "mobilesdk_app_id": "1:622748815637:android:12f60ccc934366e792191c",
         "android_client_info": {
           "package_name": "com.cyprian.moneymanager"
         }
       },
       "oauth_client": [
         {
-          "client_id": "470540540352-bk8utto53cfog32gctf2t00hho0o9vn8.apps.googleusercontent.com",
+          "client_id": "622748815637-tl164guar88q68h861kl41e9p42d6p7o.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD6ej62-czTeKgn7R5_9-g7L6Dx5PXWKA0"
+          "current_key": "AIzaSyAW-FJOTtOHIMHarQOAKG_Z_7Cr4ppF5D0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "470540540352-bk8utto53cfog32gctf2t00hho0o9vn8.apps.googleusercontent.com",
+              "client_id": "622748815637-tl164guar88q68h861kl41e9p42d6p7o.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

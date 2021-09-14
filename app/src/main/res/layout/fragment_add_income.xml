@@ -23,7 +23,7 @@
         android:layout_marginLeft="10dp"/>
 
     <TextView
-        android:id="@+id/incomeAmount"
+        android:id="@+id/incomeAmountTtl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Amount"
@@ -32,22 +32,24 @@
         android:textSize="18dp"/>
 
     <EditText
+        android:id="@+id/incomeAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/income_name"
         android:layout_marginStart="61dp"
         android:layout_marginLeft="61dp"
         android:layout_marginTop="11dp"
-        android:layout_toEndOf="@id/incomeAmount"
-        android:layout_toRightOf="@id/incomeAmount" />
+        android:layout_toEndOf="@id/incomeAmountTtl"
+        android:layout_toRightOf="@id/incomeAmountTtl" />
 
     <Button
-        android:id="@+id/btn_add_income"
+        android:id="@+id/button_add_income"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Income"
         android:background="@color/icon_color"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp" />
+        android:layout_marginBottom="20dp"
+        />
 
 </RelativeLayout>
