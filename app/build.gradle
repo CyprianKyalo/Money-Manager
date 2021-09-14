@@ -8,7 +8,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.cyprian.moneymanager"
+        applicationId "com.cyprian.money"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
@@ -48,6 +48,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:28.4.0')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth:21.0.1'
+    implementation 'com.firebaseui:firebase-ui-database:6.0.2'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.google.firebase:firebase-database:20.0.1'
     testImplementation 'junit:junit:4.+'

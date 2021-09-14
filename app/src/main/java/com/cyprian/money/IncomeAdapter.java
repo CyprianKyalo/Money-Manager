@@ -1,4 +1,4 @@
-package com.cyprian.moneymanager;
+package com.cyprian.money;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.ViewHolder> {
     private ArrayList<Income> mData;

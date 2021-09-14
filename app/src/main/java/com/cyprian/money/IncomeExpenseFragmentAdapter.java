@@ -1,30 +1,30 @@
-package com.cyprian.moneymanager;
+package com.cyprian.money;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-public class ExpenseFragmentAdapter extends FragmentStatePagerAdapter {
+import org.jetbrains.annotations.NotNull;
+
+public class IncomeExpenseFragmentAdapter extends FragmentStatePagerAdapter {
     int myNumberOfTabs;
 
-    public ExpenseFragmentAdapter(@NonNull FragmentManager fm, int numofTabs) {
-        super(fm, numofTabs);
-        this.myNumberOfTabs = numofTabs;
+    public IncomeExpenseFragmentAdapter(@NonNull @NotNull FragmentManager fm, int numOfTabs) {
+        super(fm, numOfTabs);
+        this.myNumberOfTabs = numOfTabs;
     }
 
     @NonNull
+    @NotNull
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new DailyFragment();
+                return new AddIncomeFragment();
 
             case 1:
-                return new WeeklyFragment();
-
-            case 2:
-                return new MonthlyFragment();
+                return new AddExpenseFragment();
 
             default:
                 return null;

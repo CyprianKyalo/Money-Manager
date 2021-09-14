@@ -1,4 +1,4 @@
-package com.cyprian.moneymanager;
+package com.cyprian.money;
 
 public class Income {
     //Declare member variables

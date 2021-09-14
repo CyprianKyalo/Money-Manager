@@ -1,4 +1,4 @@
-package com.cyprian.moneymanager;
+package com.cyprian.money;
 
 import android.content.Context;
 import android.view.LayoutInflater;

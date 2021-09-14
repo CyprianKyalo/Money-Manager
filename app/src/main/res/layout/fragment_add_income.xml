@@ -50,6 +50,7 @@
         android:background="@color/icon_color"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
-        />
+
+         />
 
 </RelativeLayout>

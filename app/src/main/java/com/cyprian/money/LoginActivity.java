@@ -1,4 +1,4 @@
-package com.cyprian.moneymanager;
+package com.cyprian.money;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

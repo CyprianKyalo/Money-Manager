@@ -1,22 +1,32 @@
-package com.cyprian.moneymanager;
+package com.cyprian.money;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
+
 
 //The DailyAdapter bridges between the Daily Class and the DailyFragment
 public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder> {
     //Declaring private member variables Daily Data and the context
     private ArrayList<Daily> dailyData;
     private Context myContext;
+    private DatabaseReference mExpDat;
+    private FirebaseAuth mAuth;
 
     //The constructor is for passing in array list data and the context
     DailyAdapter(ArrayList<Daily> mdailyData, Context context) {
@@ -32,6 +42,7 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder> 
         //Create a new viewholder
         return new ViewHolder(LayoutInflater.from(myContext).inflate(R.layout.daily_list_view, parent, false));
     }
+
 
     //This methods binds the view to the data
     @Override
@@ -52,23 +63,42 @@ public class DailyAdapter extends RecyclerView.Adapter<DailyAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         //Declaring private member variables the viewholder will hold
-        private TextView DailyTitle;
-        private TextView DailyDate;
-        private TextView DailyDays;
+        View mview;
+        private TextView dailyExpenseTitle;
+        private TextView dailyExpenseDate;
+        private TextView dailySpendAmount;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            DailyTitle = itemView.findViewById(R.id.expense_desc);
-            DailyDate = itemView.findViewById(R.id.daily_day);
-            DailyDays = itemView.findViewById(R.id.daily_day_name);
+            mview = itemView;
+//            dailyExpenseTitle = itemView.findViewById(R.id.expense_desc);
+//            dailyExpenseDate = itemView.findViewById(R.id.daily_day);
+//            dailySpendAmount = itemView.findViewById(R.id.spend);
+        }
+
+        private void setExpenseTitle(String expTitle) {
+            TextView mTitle = mview.findViewById(R.id.expense_desc);
+            mTitle.setText(expTitle);
+        }
+
+        private void setSpend(String spend) {
+            TextView mspend = mview.findViewById(R.id.spend);
+
+            String amount = String.valueOf(mspend);
+            mspend.setText(amount);
+        }
+
+        private void setDate(String date) {
+            TextView mdate = mview.findViewById(R.id.daily_date);
+            mdate.setText(date);
         }
 
         //Binds a current view with the data
         public void bindTo(Daily currentDaily) {
             //Populating view with the data
-            DailyTitle.setText(currentDaily.getDesc_title());
-            DailyDate.setText(currentDaily.getDates());
-            DailyDays.setText(currentDaily.getDays());
+            dailyExpenseTitle.setText(currentDaily.getExpenseTitle());
+            dailyExpenseDate.setText(currentDaily.getDate());
+            dailySpendAmount.setText(currentDaily.getSpend());
         }
     }
 }
