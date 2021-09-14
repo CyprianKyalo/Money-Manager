@@ -48,14 +48,16 @@
                 android:layout_marginTop="30dp"/>
 
             <EditText
+                android:id="@+id/input_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/add_cat"
-                android:layout_toRightOf="@id/cat_name"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/cat_name" />
 
             <Button
+                android:id="@+id/btn_add_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
