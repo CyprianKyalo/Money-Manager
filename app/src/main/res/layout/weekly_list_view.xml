@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
+    android:layout_height="60dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:elevation="10dp"
     android:layout_margin="2dp"
@@ -15,78 +15,32 @@
         >
 
         <TextView
-            android:id="@+id/daily_day"
+            android:id="@+id/weekly_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="1dp"
-            android:layout_marginTop="3dp"
-            android:text="28"
-            android:textColor="@color/icon_color"
-            android:textSize="30sp" />
-
-        <TextView
-            android:id="@+id/daily_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="3dp"
-            android:layout_toEndOf="@+id/daily_day"
-            android:layout_toRightOf="@+id/daily_day"
-            android:text="2020.07"
-            android:textColor="@color/icon_color"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/daily_day_name"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/daily_date"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="3dp"
-            android:layout_toRightOf="@+id/daily_day"
-            android:background="#a02ecc"
-            android:gravity="center_horizontal"
-            android:text="Wed"
-            android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/expense_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="30dp"
-            android:text="Brunch with me"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/spend_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/daily_day_name"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="13dp"
-            android:text="Spent:"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:text="2021.07.8 - 2021.07.1"
+            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/spend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/daily_day_name"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="13dp"
-            android:layout_marginBottom="1dp"
-            android:layout_toRightOf="@id/spend_text"
-            android:text="Ksh. 300"
-            android:textStyle="bold"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="15sp" />
+            android:text="Spend"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/weekly_spend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="Ksh. 3000"
+            android:layout_below="@id/spend"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="23dp"
+            android:textColor="#ff0000"/>
+
 
     </RelativeLayout>
 

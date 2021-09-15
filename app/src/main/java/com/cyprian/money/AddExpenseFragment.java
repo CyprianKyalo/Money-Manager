@@ -22,9 +22,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import org.jetbrains.annotations.NotNull;
+import org.joda.time.DateTime;
+import org.joda.time.Months;
+import org.joda.time.MutableDateTime;
+import org.joda.time.Weeks;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -85,6 +90,15 @@ public class AddExpenseFragment extends Fragment {
 //                    String mDate = DateFormat.getDateInstance().format(new Date());
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E, dd MMM yyyy");
                     String mDate = simpleDateFormat.format(new Date());
+                    Calendar cal = Calendar.getInstance();
+                    String date = simpleDateFormat.format(cal.getTime());
+
+                    MutableDateTime epoch = new MutableDateTime();
+                    epoch.setDate(0);
+                    DateTime now = new DateTime();
+                    Weeks weeks = Weeks.weeksBetween(epoch, now);
+                    Months months = Months.monthsBetween(epoch, now);
+
 
 //                    Toast.makeText(getContext(), "Clicked yes", Toast.LENGTH_SHORT).show();
 //
@@ -93,7 +107,7 @@ public class AddExpenseFragment extends Fragment {
 //
 //                    System.out.println("Current Day: " + mDate);
 
-                    Expense expense = new Expense(titleExp, expenseAmt, noteExp, mDate);
+                    Expense expense = new Expense(titleExp, expenseAmt, noteExp, mDate, weeks.getWeeks(), months.getMonths());
                     expenseRef.child(id).setValue(expense).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull @NotNull Task<Void> task) {
@@ -109,7 +123,6 @@ public class AddExpenseFragment extends Fragment {
                         }
                     });
                 }
-
 
             }
         });

@@ -2,63 +2,122 @@ package com.cyprian.money;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
+import org.joda.time.DateTime;
+import org.joda.time.MutableDateTime;
+import org.joda.time.Weeks;
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link WeeklyFragment#newInstance} factory method to
- * create an instance of this fragment.
  */
 public class WeeklyFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private RecyclerView weeklyRecyclerView;
+    private WeeklyAdapter weeklyAdapter;
+    private List<Expense> myDataList;
+    private TextView weeklySpend;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private DatabaseReference mExpDat;
+    private FirebaseAuth mAuth;
+    private String onlineUserId = "";
+
 
     public WeeklyFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment WeeklyFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static WeeklyFragment newInstance(String param1, String param2) {
-        WeeklyFragment fragment = new WeeklyFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_weekly, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_weekly, container, false);
+
+        weeklySpend = rootView.findViewById(R.id.weekly_spend);
+
+        weeklyRecyclerView = rootView.findViewById(R.id.recycler_weekly);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        weeklyRecyclerView.setHasFixedSize(true);
+        weeklyRecyclerView.setLayoutManager(linearLayoutManager);
+
+        mAuth = FirebaseAuth.getInstance();
+        onlineUserId = mAuth.getCurrentUser().getUid();
+
+//        FirebaseUser mUser = mAuth.getCurrentUser();
+//        String uid = mUser.getUid();
+
+//        mExpDat = FirebaseDatabase.getInstance().getReference().child("expense").child(mAuth.getCurrentUser().getUid());
+
+        myDataList = new ArrayList<>();
+        weeklyAdapter = new WeeklyAdapter(getContext(), myDataList);
+        weeklyRecyclerView.setAdapter(weeklyAdapter);
+
+        weekSpendingItems();
+
+        return rootView;
     }
+
+    private void weekSpendingItems() {
+        MutableDateTime epoch = new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now = new DateTime();
+        Weeks weeks = Weeks.weeksBetween(epoch, now);
+
+        mExpDat = FirebaseDatabase.getInstance().getReference().child("expense").child(mAuth.getCurrentUser().getUid());
+        Query query = mExpDat.orderByChild("weeks").equalTo(weeks.getWeeks());
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                myDataList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Expense expense = dataSnapshot.getValue(Expense.class);
+                    myDataList.add(expense);
+                }
+
+                weeklyAdapter.notifyDataSetChanged();
+
+                int totalAmt = 0;
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                    Object total = map.get("expenseAmount");
+                    int pTotal = Integer.parseInt(String.valueOf(total));
+                    totalAmt += pTotal;
+
+
+                }
+//                weeklySpend.setText(totalAmt);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+    }
+
 }
