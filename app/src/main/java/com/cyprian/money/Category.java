@@ -10,6 +10,13 @@ public class Category {
         this.category_amt = category_amt;
     }
 
+    public Category(String category_Title) {
+        this.category_Title = category_Title;
+    }
+
+    public Category() {
+    }
+
     //Getters
     public String getCategory_Title() {
         return category_Title;

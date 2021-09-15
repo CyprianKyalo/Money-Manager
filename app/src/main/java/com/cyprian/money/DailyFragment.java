@@ -138,7 +138,7 @@ public class DailyFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
-    private static class myViewHolder extends RecyclerView.ViewHolder{
+    protected static class myViewHolder extends RecyclerView.ViewHolder{
         View mview;
 
         public myViewHolder(@NonNull @NotNull View itemView) {

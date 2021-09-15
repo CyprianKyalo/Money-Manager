@@ -10,6 +10,9 @@ public class Income {
         this.amount = amount;
     }
 
+    public Income() {
+    }
+
     //Getters
     public String getIncome_title() {
         return income_title;

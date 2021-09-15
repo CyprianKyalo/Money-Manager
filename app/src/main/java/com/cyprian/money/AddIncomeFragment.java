@@ -26,7 +26,6 @@ import com.google.firebase.database.annotations.NotNull;
  * A simple {@link Fragment} subclass.
  */
 public class AddIncomeFragment extends Fragment {
-    private Button btn;
     private EditText incomeName;
     private EditText amount;
     private Button sendIncome;

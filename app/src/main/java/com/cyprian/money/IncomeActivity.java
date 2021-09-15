@@ -8,21 +8,37 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class IncomeActivity extends AppCompatActivity {
 
     private ArrayList<Income> incomeArrayList;
     private IncomeAdapter incomeAdapter;
+    private RecyclerView recyclerView;
     BottomNavigationView bottomNavigationView;
+
+    private DatabaseReference mIncome;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,17 +47,6 @@ public class IncomeActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-
-//        FloatingActionButton fab = findViewById(R.id.fab_income);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                Intent intent = new Intent(IncomeActivity.this, IncomeExpenseActivity.class);
-////                startActivity(intent);
-//                Fragment fragment = new AddIncomeFragment();
-////                getSupportFragmentManager().beginTransaction().replace(R.i)
-//            }
-//        });
 
         bottomNavigationView = findViewById(R.id.bottom_nav);
 
@@ -70,47 +75,85 @@ public class IncomeActivity extends AppCompatActivity {
             }
         });
 
+        mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser mUser = mAuth.getCurrentUser();
+        String uid = mUser.getUid();
+
+        mIncome = FirebaseDatabase.getInstance().getReference().child("income").child(mAuth.getCurrentUser().getUid());
+
+
         //Initializing the recycler view
-        RecyclerView recyclerView = findViewById(R.id.recycler_income);
+        recyclerView = findViewById(R.id.recycler_income);
         //setting the layout manager for the recycler view
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //Initializing the array list that will contain the data
-        incomeArrayList = new ArrayList<>();
-        //Initializing the dailyAdapter
-        incomeAdapter = new IncomeAdapter(this, incomeArrayList);
-        //Setting the adapter
-        recyclerView.setAdapter(incomeAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        //Initializing the array list that will contain the data
+//        incomeArrayList = new ArrayList<>();
+//        //Initializing the dailyAdapter
+//        incomeAdapter = new IncomeAdapter(this, incomeArrayList);
+//        //Setting the adapter
+//        recyclerView.setAdapter(incomeAdapter);
 
         //Getting the data
-        initializeData();
+
 
     }
 
-    private void initializeData() {
-        //Getting the data created in strings.xml
-        String[] incomeTitles = getResources().getStringArray(R.array.income_titles);
-        String[] incomeAmounts = getResources().getStringArray(R.array.income_amounts);
+    @Override
+    public void onStart() {
+        super.onStart();
 
-        //clearing existing data to avoid duplication
-        incomeArrayList.clear();
+        FirebaseRecyclerOptions<Income> options = new FirebaseRecyclerOptions.Builder<Income>()
+                .setQuery(mIncome, Income.class)
+                .build();
 
-        for (int i = 0; i < incomeTitles.length; i++) {
-            incomeArrayList.add(new Income(incomeTitles[i], incomeAmounts[i]));
+        FirebaseRecyclerAdapter<Income, myViewHolder> adapter = new FirebaseRecyclerAdapter<Income, myViewHolder>(options) {
+            @NonNull
+            @NotNull
+            @Override
+            public myViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.income_list_items, null);
+                return new myViewHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull @NotNull myViewHolder holder, int position, @NonNull @NotNull Income model) {
+                holder.setIncomeTitle(model.getIncome_title());
+                holder.setIncomeAmt("Ksh. " + model.getAmount());
+            }
+        };
+
+        recyclerView.setAdapter(adapter);
+        adapter.startListening();
+        adapter.notifyDataSetChanged();
+    }
+
+    private static class myViewHolder extends RecyclerView.ViewHolder{
+        View mview;
+
+        public myViewHolder(@NonNull @NotNull View itemView) {
+            super(itemView);
+
+            mview = itemView;
         }
 
-        //Notify the adapter of the change in data set
-        incomeAdapter.notifyDataSetChanged();
+        private void setIncomeTitle(String incTitle) {
+            TextView mTitle = mview.findViewById(R.id.income_title);
+            mTitle.setText(incTitle);
+        }
 
-        //Floating Action Button
-//        FloatingActionButton fab = findViewById(R.id.fab_income);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(IncomeActivity.this, MainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        private void setIncomeAmt(String incAmt) {
+            TextView mspend = mview.findViewById(R.id.income_amt);
+            mspend.setText(incAmt);
+        }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
