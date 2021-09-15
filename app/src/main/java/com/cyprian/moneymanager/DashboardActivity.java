@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -31,6 +33,39 @@ public class DashboardActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+
+//        Dashboard expenses
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_daily));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_weekly));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_monthly));
+
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        final ViewPager viewPager = findViewById(R.id.view_pager);
+
+        final ExpenseFragmentAdapter expenseFragmentAdapter = new ExpenseFragmentAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+
+        viewPager.setAdapter(expenseFragmentAdapter);
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+//        End of dashboard expenses
 
         bottomNavigationView = findViewById(R.id.bottom_nav);
 
@@ -59,35 +94,35 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-        //Initializing the recycler view
-        RecyclerView recyclerView = findViewById(R.id.dashboard_recyclerView);
-        //setting the layout manager for the recycler view
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //Initializing the array list that will contain the data
-        categoryArrayList = new ArrayList<>();
-        //Initializing the dailyAdapter
-        categoryAdapter = new CategoryAdapter(this, categoryArrayList);
-        //Setting the adapter
-        recyclerView.setAdapter(categoryAdapter);
-
-        //Getting the data
-        initializeData();
+//        //Initializing the recycler view
+//        RecyclerView recyclerView = findViewById(R.id.dashboard_recyclerView);
+//        //setting the layout manager for the recycler view
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        //Initializing the array list that will contain the data
+//        categoryArrayList = new ArrayList<>();
+//        //Initializing the dailyAdapter
+//        categoryAdapter = new CategoryAdapter(this, categoryArrayList);
+//        //Setting the adapter
+//        recyclerView.setAdapter(categoryAdapter);
+//
+//        //Getting the data
+//        initializeData();
     }
 
-    private void initializeData() {
-        //Getting the data created in strings.xml
-        String[] categoryTitles = getResources().getStringArray(R.array.category_titles);
-        String[] categoryAmounts = getResources().getStringArray(R.array.category_amounts);
-
-        //clearing existing data to avoid duplication
-        categoryArrayList.clear();
-
-        for (int i = 0; i < categoryTitles.length; i++) {
-            categoryArrayList.add(new Category(categoryTitles[i], categoryAmounts[i]));
-        }
-
-        //Notify the adapter of the change in data set
-        categoryAdapter.notifyDataSetChanged();
+//    private void initializeData() {
+//        //Getting the data created in strings.xml
+//        String[] categoryTitles = getResources().getStringArray(R.array.category_titles);
+//        String[] categoryAmounts = getResources().getStringArray(R.array.category_amounts);
+//
+//        //clearing existing data to avoid duplication
+//        categoryArrayList.clear();
+//
+//        for (int i = 0; i < categoryTitles.length; i++) {
+//            categoryArrayList.add(new Category(categoryTitles[i], categoryAmounts[i]));
+//        }
+//
+//        //Notify the adapter of the change in data set
+//        categoryAdapter.notifyDataSetChanged();
 
         //Floating Action Button
 //        FloatingActionButton fab = findViewById(R.id.fab_category);
@@ -98,7 +133,7 @@ public class DashboardActivity extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
-    }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

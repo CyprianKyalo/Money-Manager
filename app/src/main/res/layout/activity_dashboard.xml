@@ -11,7 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="#0094EA"
+        android:background="@color/white"
+        app:titleTextColor="#6c2488"
+        app:collapseIcon="@color/icon_color"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
@@ -22,10 +24,11 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
-        app:itemIconTint="@android:color/white"
-        app:itemTextColor="@android:color/white"
+        app:itemIconTint="@color/icon_color"
+        app:itemTextColor="@color/icon_color"
         app:menu="@menu/nav_bottom"
-        android:background="@android:color/holo_blue_light">
+        android:elevation="20dp"
+        android:background="@color/white">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
@@ -34,35 +37,35 @@
         android:layout_width="135dp"
         android:layout_height="100dp"
         android:layout_below="@id/tool_bar"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:backgroundTint="#8218A5"
+        android:backgroundTint="#6c2488"
+        app:cardCornerRadius="10dp"
         app:cardElevation="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            >
+            android:layout_margin="10dp">
 
             <TextView
                 android:id="@+id/inco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Income"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
-                android:textSize="18dp"
-                android:textColor="@android:color/white"/>
+                android:text="Income"
+                android:textColor="@android:color/white"
+                android:textSize="18dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ksh. 200000"
                 android:layout_below="@id/inco"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:textColor="@android:color/white"/>
+                android:text="Ksh. 200000"
+                android:textColor="@android:color/white" />
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
@@ -71,11 +74,13 @@
         android:layout_width="135dp"
         android:layout_height="100dp"
         android:layout_below="@id/tool_bar"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="8dp"
         android:layout_toEndOf="@id/dash_income"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:backgroundTint="#7d0aa3"
         android:layout_toRightOf="@id/dash_income"
+        android:backgroundTint="#6c2488"
+        app:cardCornerRadius="10dp"
         app:cardElevation="10dp">
 
         <RelativeLayout
@@ -87,28 +92,29 @@
                 android:id="@+id/exp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Expense"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
-                android:textSize="18dp"
-                android:textColor="@android:color/white"/>
+                android:text="Expense"
+                android:textColor="@android:color/white"
+                android:textSize="18dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ksh. 200000"
                 android:layout_below="@id/exp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:textColor="@android:color/white"/>
+                android:text="Ksh. 200000"
+                android:textColor="@android:color/white" />
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 
     <TextView
+        android:id="@+id/expense_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Categories"
+        android:text="Expenses"
         android:layout_below="@id/dash_income"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/centabel_book"
@@ -116,12 +122,26 @@
         android:layout_centerHorizontal="true"
         android:textStyle="normal"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/dashboard_recyclerView"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/dash_income"
-        android:layout_marginTop="50dp"
-        android:layout_above="@id/bottom_nav"/>
+        android:layout_height="40sp"
+        android:layout_below="@+id/expense_title"
+        android:background="@color/white"
+        app:tabTextColor="@color/icon_color"
+        app:tabSelectedTextColor="#3f194e"
+        android:minHeight="20sp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottom_nav"
+        android:layout_below="@id/tab_layout"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="-1dp" />
 
 </RelativeLayout>
