@@ -41,8 +41,8 @@ public class WeeklyAdapter extends RecyclerView.Adapter<WeeklyAdapter.myViewHold
     public void onBindViewHolder(@NonNull @NotNull myViewHolder holder, int position) {
         final Expense expense = myDataList.get(position);
 
-        holder.weeklyDate.setText(expense.getExpenseDate());
-        holder.weeklyAmount.setText(expense.getExpenseAmount());
+        holder.weeklyDate.setText(""+expense.getWeeks());
+//        holder.weeklyAmount.setText(expense.getExpenseAmount());
 
 //        String resDate = model.getExpenseDate();
 //        SimpleDateFormat sd = new SimpleDateFormat("E, dd MMM yyyy");
@@ -93,7 +93,7 @@ public class WeeklyAdapter extends RecyclerView.Adapter<WeeklyAdapter.myViewHold
 
             mview = itemView;
             weeklyDate = itemView.findViewById(R.id.weekly_date);
-            weeklyAmount = itemView.findViewById(R.id.weekly_spend);
+//            weeklyAmount = itemView.findViewById(R.id.week_spend);
         }
 
 //        private void setExpenseTitle(String expTitle) {
