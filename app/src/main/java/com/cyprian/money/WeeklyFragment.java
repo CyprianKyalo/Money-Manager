@@ -65,7 +65,7 @@ public class WeeklyFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setReverseLayout(true);
-//        linearLayoutManager.removeAllViews();
+
         weeklyRecyclerView.setHasFixedSize(true);
         weeklyRecyclerView.setLayoutManager(linearLayoutManager);
 
@@ -94,14 +94,11 @@ public class WeeklyFragment extends Fragment {
                 int totAmt = 0;
                 int totamt = 0;
 
-
-
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
                     Object objDate = map.get("expenseDate");
 
                     SimpleDateFormat df = new SimpleDateFormat("E, dd MMM yyyy");
-
 
                     try {
                         Date date = df.parse(String.valueOf(objDate));
@@ -147,37 +144,20 @@ public class WeeklyFragment extends Fragment {
                     System.out.println("Hashmap vals are: "+hashMap.get(i));
                 }
 
-//                HashMap<String, String> map = new HashMap<String, String>();
-//
-//                //Getting Collection of values from HashMap
-//
-//                Collection<String> values = map.values();
-//
-//                //Creating an ArrayList of values
-//
-//                ArrayList<String> listOfValues = new ArrayList<String>(hashMap);
-
                 List<Integer> list = new ArrayList<Integer>(hashMap.values()); //Most likely dataSnapshot.getValues()
 
                 weeklyData.clear();
                 weeklyDate.clear();
 
-//                for (int i = 0; i < list.size(); i++) {
-//                    System.out.println("Values are: "+list.get(i));
-//
-//                    weeklyData.add(list.get(i));
-//
-//                }
-
                 for (Object key : hashMap.keySet()) {
                     System.out.println("The keys from Bind are: "+key);
-                    weeklyData.add((Integer) key);
+                    weeklyDate.add((Integer) key);
 
                 }
 
                 for (Object key : hashMap.values()) {
                     System.out.println("The values are: "+key);
-                    weeklyDate.add((Integer) key);
+                    weeklyData.add((Integer) key);
                 }
 
                 weeklyAdapter.notifyDataSetChanged();
@@ -189,17 +169,4 @@ public class WeeklyFragment extends Fragment {
             }
         });
     }
-
-
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//
-//        Query query = mExpDat.orderByChild("weeks");
-//        final int[] sum = {0};
-//        FirebaseRecyclerOptions<Expense> options = new FirebaseRecyclerOptions.Builder<Expense>()
-//                .setQuery(query, Expense.class)
-//                .build();
-//    }
-
 }
