@@ -5,14 +5,16 @@ public class Expense {
     private String expenseAmount;
     private String expenseNote;
     private String expenseDate;
+    private String category;
     private int weeks;
     private int months;
 
-    public Expense(String expenseTitle, String expenseAmount, String expenseNote, String expenseDate, int weeks, int months) {
+    public Expense(String expenseTitle, String expenseAmount, String expenseNote, String expenseDate, String category, int weeks, int months) {
         this.expenseTitle = expenseTitle;
         this.expenseAmount = expenseAmount;
         this.expenseNote = expenseNote;
         this.expenseDate = expenseDate;
+        this.category = category;
         this.weeks = weeks;
         this.months = months;
     }
@@ -66,5 +68,13 @@ public class Expense {
 
     public void setMonths(int months) {
         this.months = months;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

@@ -55,7 +55,8 @@
         android:layout_toEndOf="@id/category"
         android:layout_toRightOf="@id/category"
         android:layout_below="@id/note_expense"
-        android:layout_marginTop="13dp"/>
+        android:layout_marginTop="13dp"
+        />
 
     <TextView
         android:id="@+id/amount"

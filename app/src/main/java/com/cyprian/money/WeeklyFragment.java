@@ -74,9 +74,8 @@ public class WeeklyFragment extends Fragment {
 
 //        String uid = mUser.getUid();
         mAuth = FirebaseAuth.getInstance();
-        onlineUserId = mAuth.getCurrentUser().getUid();
+//        onlineUserId = mAuth.getCurrentUser().getUid();
         mExpDat = FirebaseDatabase.getInstance().getReference().child("expense").child(mAuth.getCurrentUser().getUid());
-
 
 
         weeklyRecyclerView = rootView.findViewById(R.id.recycler_weekly);
@@ -251,6 +250,7 @@ public class WeeklyFragment extends Fragment {
             @Override
             protected void onBindViewHolder(@NonNull @NotNull WeeklyFragment.myViewHolder holder, int position, @NonNull @NotNull Expense model) {
 //                final int[] sum = {0};
+//                final int[] totAmount = {0};
 
                 query.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -264,23 +264,15 @@ public class WeeklyFragment extends Fragment {
                             int pTotal = Integer.parseInt(String.valueOf(total));
                             totAmt += pTotal;
 
-//                            sum[0] += data.child("expenseAmount").getValue(Integer.class);
 
                         }
                         System.out.println(totAmt);
-//                        if (!(oldWeek == ""+model.getWeeks())) {
-//                            holder.setWeeklyAmount(""+totAmt);
-//                            holder.setWeeklyDate(""+model.getExpenseDate());
-//
-//                        }
-                        holder.setWeeklyAmount(""+totAmt);
+
                         holder.setWeeklyDate(""+model.getWeeks());
-
-//                        oldWeek = ""+model.getWeeks();
-
-
-
+                        holder.setWeeklyAmount(""+totAmt);
+//                        totAmount[0] = totAmt;
                     }
+
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -288,13 +280,6 @@ public class WeeklyFragment extends Fragment {
                     }
                 });
 
-//                holder.setDate(model.getExpenseDate());
-//                holder.setExpenseTitle(model.getExpenseTitle());
-//                holder.setSpend("Ksh. " + model.getExpenseAmount());
-//                System.out.println("Code: " + sum[0]);
-
-//                holder.setWeeklyDate(""+model.getWeeks());
-//                holder.setWeeklyAmount(""+sum[0]);
 
             }
         };
