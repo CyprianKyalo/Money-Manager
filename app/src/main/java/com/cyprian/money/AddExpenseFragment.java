@@ -35,6 +35,7 @@ import org.joda.time.MutableDateTime;
 import org.joda.time.Weeks;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -145,6 +146,22 @@ public class AddExpenseFragment extends Fragment implements AdapterView.OnItemSe
                     DateTime now = new DateTime();
                     Weeks weeks = Weeks.weeksBetween(epoch, now);
                     Months months = Months.monthsBetween(epoch, now);
+
+                    String input = "20210918";
+                    String format = "yyyyMMdd";
+
+                    SimpleDateFormat df = new SimpleDateFormat(format);
+                    try {
+                        Date tdate = df.parse(input);
+                        Calendar cale = Calendar.getInstance();
+                        cale.setTime(tdate);
+                        int week = cale.get(Calendar.WEEK_OF_YEAR);
+                        cale.setTime(tdate);
+
+                        System.out.println("Week Number is: " + week + " Date is: " + tdate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
 
                     Expense expense = new Expense(titleExp, expenseAmt, noteExp, mDate, catItem, weeks.getWeeks(), months.getMonths());
                     expenseRef.child(id).setValue(expense).addOnCompleteListener(new OnCompleteListener<Void>() {

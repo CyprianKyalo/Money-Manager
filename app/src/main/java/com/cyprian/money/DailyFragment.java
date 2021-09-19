@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,13 +12,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Text;
@@ -25,7 +30,10 @@ import org.w3c.dom.Text;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,8 +41,8 @@ import java.util.Date;
 public class DailyFragment extends Fragment {
     //Declaring private member variables
     private RecyclerView dailyRecyclerView;
-    private ArrayList<Daily> myDailyData;
-    private DailyAdapter dailyAdapter;
+    private View view;
+    private FirebaseFirestore db;
 
     private DatabaseReference mExpDat;
     private FirebaseAuth mAuth;
@@ -56,6 +64,7 @@ public class DailyFragment extends Fragment {
 
         mExpDat = FirebaseDatabase.getInstance().getReference().child("expense").child(mAuth.getCurrentUser().getUid());
 
+        db = FirebaseFirestore.getInstance();
 
         //Initializing the recycler view
         dailyRecyclerView = rootView.findViewById(R.id.recycler_daily);
@@ -91,7 +100,7 @@ public class DailyFragment extends Fragment {
             @NotNull
             @Override
             public myViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.daily_list_view, null);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.daily_list_view, null);
                 return new myViewHolder(view);
             }
 
@@ -132,6 +141,40 @@ public class DailyFragment extends Fragment {
 
             }
         };
+
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.RIGHT|ItemTouchHelper.LEFT|ItemTouchHelper.DOWN|ItemTouchHelper.UP, ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull @NotNull RecyclerView recyclerView, @NonNull @NotNull RecyclerView.ViewHolder viewHolder, @NonNull @NotNull RecyclerView.ViewHolder target) {
+//                int from = viewHolder.getAdapterPosition();
+//                int to = viewHolder.getAdapterPosition();
+
+//                Collections.swap((List<?>) view, from, to);
+//                adapter.notifyItemMoved(from, to);
+
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull @NotNull RecyclerView.ViewHolder viewHolder, int direction) {
+//                int position = viewHolder.getAdapterPosition();
+//                view.remove(viewHolder.getAdapterPosition());
+                String docID = (String) viewHolder.itemView.getTag();
+
+                db.collection("expense").document(docID).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(getContext(), "Item deleted successfully", Toast.LENGTH_SHORT);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        Toast.makeText(getContext(), "Item not deleted", Toast.LENGTH_SHORT);
+                    }
+                });
+
+            }
+        });
+        helper.attachToRecyclerView(dailyRecyclerView);
 
         dailyRecyclerView.setAdapter(adapter);
         adapter.startListening();

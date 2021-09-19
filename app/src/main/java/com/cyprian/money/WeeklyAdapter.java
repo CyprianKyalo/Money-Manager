@@ -9,24 +9,32 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class WeeklyAdapter extends RecyclerView.Adapter<WeeklyAdapter.myViewHolder>{
 
     private Context mContext;
-    private List<Expense> myDataList;
+    private List<Integer> myDataList;
+
 
 //    private String weeklyDate = "";
 //    private int weeklyAmount = 0;
 
-    public WeeklyAdapter(Context mContext, List<Expense> myDataList) {
+    public WeeklyAdapter(Context mContext, ArrayList<Integer> myDataList) {
         this.mContext = mContext;
-        this.myDataList = myDataList;
+        this.myDataList = (List<Integer>) myDataList;
     }
 
     @NonNull
@@ -34,48 +42,21 @@ public class WeeklyAdapter extends RecyclerView.Adapter<WeeklyAdapter.myViewHold
     @Override
     public myViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.weekly_list_view, null);
+
         return new WeeklyAdapter.myViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull myViewHolder holder, int position) {
-        final Expense expense = myDataList.get(position);
+        Integer expense = myDataList.get(position);
+//        holder.setWeeklyDate(""+expense.keySet());
 
-        holder.weeklyDate.setText(""+expense.getWeeks());
-//        holder.weeklyAmount.setText(expense.getExpenseAmount());
-
-//        String resDate = model.getExpenseDate();
-//        SimpleDateFormat sd = new SimpleDateFormat("E, dd MMM yyyy");
-//        try {
-//            Date date = sd.parse(resDate);
-//            SimpleDateFormat sdi = new SimpleDateFormat("dd");
-//            holder.setDay(sdi.format(date));
-//            System.out.println("Current Day" + date);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//        try {
-//            Date date = sd.parse(resDate);
-//            SimpleDateFormat sdn = new SimpleDateFormat("E");
-//            holder.setDailyName(sdn.format(date));
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//        try {
-//            Date date = sd.parse(resDate);
-//            SimpleDateFormat sdn = new SimpleDateFormat("yyyy.MM");
-//            holder.setDate(sdn.format(date));
-//        } catch (ParseException e) {
-//            e.printStackTrace();
+//        for (int i = 0; i < expense.size(); i++) {
+//            holder.setWeeklyAmount(""+expense[i]);
 //        }
 
-
-//                holder.setDate(model.getExpenseDate());
-//        holder.setExpenseTitle(model.getExpenseTitle());
-//        holder.setSpend("Ksh. " + model.getExpenseAmount());
+        holder.setWeeklyAmount(""+expense);
+//        holder.setWeeklyDate();
 
     }
 
@@ -84,43 +65,25 @@ public class WeeklyAdapter extends RecyclerView.Adapter<WeeklyAdapter.myViewHold
         return myDataList.size();
     }
 
-    public class myViewHolder extends RecyclerView.ViewHolder{
+    protected static class myViewHolder extends RecyclerView.ViewHolder{
         View mview;
-        public TextView weeklyDate, weeklyAmount;
 
         public myViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
             mview = itemView;
-            weeklyDate = itemView.findViewById(R.id.weekly_date);
-//            weeklyAmount = itemView.findViewById(R.id.week_spend);
         }
 
-//        private void setExpenseTitle(String expTitle) {
-//            TextView mTitle = mview.findViewById(R.id.expense_desc);
-//            mTitle.setText(expTitle);
-//        }
-//
-//        private void setSpend(String spend) {
-//            TextView mspend = mview.findViewById(R.id.spend);
-//
-////            String amount = String.valueOf(mspend);
-//            mspend.setText(spend);
-//        }
-//
-//        private void setDate(String date) {
-//            TextView mdate = mview.findViewById(R.id.daily_date);
-//            mdate.setText(date);
-//        }
-//
-//        private void setDay(String day) {
-//            TextView dailyDay = mview.findViewById(R.id.daily_day);
-//            dailyDay.setText(day);
-//        }
-//
-//        private void setDailyName(String name) {
-//            TextView dailyName = mview.findViewById(R.id.daily_day_name);
-//            dailyName.setText(name);
-//        }
+        private void setWeeklyDate(String expTitle) {
+            TextView mWeek = mview.findViewById(R.id.weekly_date);
+            mWeek.setText(expTitle);
+        }
+
+        private void setWeeklyAmount(String spend) {
+            TextView mspend = mview.findViewById(R.id.week_spend);
+
+//            String amount = String.valueOf(mspend);
+            mspend.setText(spend);
+        }
     }
 }
