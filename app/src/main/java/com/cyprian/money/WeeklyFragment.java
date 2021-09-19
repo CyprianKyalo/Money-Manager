@@ -47,7 +47,7 @@ public class WeeklyFragment extends Fragment {
 
     private Integer key_amt, value_amt;
     HashMap hashMap = new HashMap();
-    private ArrayList<Integer> weeklyData;
+    private ArrayList<Integer> weeklyData, weeklyDate;
     private ArrayList<Integer> weeklyAmts;
 
 
@@ -70,8 +70,9 @@ public class WeeklyFragment extends Fragment {
         weeklyRecyclerView.setLayoutManager(linearLayoutManager);
 
         weeklyData = new ArrayList<Integer>();
+        weeklyDate = new ArrayList<Integer>();
 
-        weeklyAdapter = new WeeklyAdapter(getContext(), weeklyData);
+        weeklyAdapter = new WeeklyAdapter(getContext(), weeklyData, weeklyDate);
         weeklyRecyclerView.setAdapter(weeklyAdapter);
 
         createHash();
@@ -159,6 +160,7 @@ public class WeeklyFragment extends Fragment {
                 List<Integer> list = new ArrayList<Integer>(hashMap.values()); //Most likely dataSnapshot.getValues()
 
                 weeklyData.clear();
+                weeklyDate.clear();
 
 //                for (int i = 0; i < list.size(); i++) {
 //                    System.out.println("Values are: "+list.get(i));
@@ -174,13 +176,8 @@ public class WeeklyFragment extends Fragment {
                 }
 
                 for (Object key : hashMap.values()) {
-                    System.out.println("The values are: "+hashMap.values());
-                }
-
-                for (int i = 0; i < hashMap.size(); i++) {
-                    System.out.println("Hashmap keys are: "+hashMap);
-
-                    System.out.println("Hashmap vals are: "+hashMap.get(i));
+                    System.out.println("The values are: "+key);
+                    weeklyDate.add((Integer) key);
                 }
 
                 weeklyAdapter.notifyDataSetChanged();
