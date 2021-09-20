@@ -6,6 +6,7 @@
     android:elevation="10dp"
     android:layout_margin="2dp"
     android:background="#A4ABBD"
+    android:layout_marginBottom="5dp"
     >
 
     <RelativeLayout

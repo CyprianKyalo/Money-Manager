@@ -23,7 +23,7 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="40sp"
-        android:layout_below="@+id/tool_bar"
+        android:layout_below="@id/tool_bar"
         android:background="@color/white"
         app:tabTextColor="@color/icon_color"
         app:tabSelectedTextColor="#3f194e"

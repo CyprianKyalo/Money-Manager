@@ -83,7 +83,7 @@ public class IncomeExpenseActivity extends AppCompatActivity {
 
         incomeName = view.findViewById(R.id.income_name);
         amount = view.findViewById(R.id.incomeAmount);
-        sendIncome = view.findViewById(R.id.button_add_income);
+        sendIncome = view.findViewById(R.id.btn_add_income);
 
 
 

@@ -25,7 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     //Declare instances of the views
     private Button registerBtn;
-    private EditText emailField, usernameField, passwordField;
+    private EditText emailField, passwordField;
     private TextView loginTxtView;
     //Declare an instance of Firebase Authentication
     private FirebaseAuth mAuth;
@@ -50,7 +50,6 @@ public class RegisterActivity extends AppCompatActivity {
         loginTxtView = findViewById(R.id.loginTxtView);
         registerBtn = findViewById(R.id.registerBtn);
         emailField = findViewById(R.id.email);
-        usernameField = findViewById(R.id.username);
         passwordField = findViewById(R.id.password);
 
         //Initialize an Instance of Firebase Auth by calling the getInstance() method
@@ -82,12 +81,11 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, "LOADING...", Toast.LENGTH_LONG).show();
 
                 //get username, email, password, pwd
-                final String username = usernameField.getText().toString().trim();
                 final String email = emailField.getText().toString().trim();
                 final String password = passwordField.getText().toString().trim();
 
                 //Validate to ensure that the user has entered email and username
-                if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
+                if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
                     mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -99,7 +97,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 //Create a child node database reference to attach the user_id to the users node
                                 DatabaseReference current_user_db = userDetailsReference.child(user_id);
                                 //Set username and image on the users' unique path(current_users_db)
-                                current_user_db.child("Username").setValue(username);
                                 current_user_db.child("Image").setValue("Default");
 
                                 Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
