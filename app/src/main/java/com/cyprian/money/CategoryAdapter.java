@@ -46,7 +46,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder{
         //Declaring private member variables the viewholder will hold
         private TextView categoryTitle;
-        private TextView categoryAmt;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);

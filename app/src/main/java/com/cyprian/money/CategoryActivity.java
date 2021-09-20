@@ -81,9 +81,9 @@ public class CategoryActivity extends AppCompatActivity {
         crecyclerView = findViewById(R.id.recycler_category);
         //setting the layout manager for the recycler view
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setStackFromEnd(true);
-        linearLayoutManager.setReverseLayout(true);
-        crecyclerView.setHasFixedSize(true);
+//        linearLayoutManager.setStackFromEnd(true);
+//        linearLayoutManager.setReverseLayout(true);
+//        crecyclerView.setHasFixedSize(true);
         crecyclerView.setLayoutManager(linearLayoutManager);
     }
 

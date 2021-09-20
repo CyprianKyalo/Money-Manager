@@ -124,7 +124,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="40dp"
                 android:layout_height="wrap_content"
-                android:text="Add Category"/>
+                android:text="Add Expense"/>
 
         </RelativeLayout>
 

@@ -2,15 +2,20 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
-    android:elevation="10dp"
-    android:layout_marginBottom="5dp">
+    android:elevation="4dp"
+    android:padding="5dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="8dp">
 
     <RelativeLayout
         android:layout_margin="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/income_title"
@@ -19,7 +24,6 @@
             android:text="Shopping"
             android:textSize="17dp"
             android:textColor="#4b0e60"
-            android:fontFamily="@font/pipetton"
             android:textStyle="normal"/>
 
         <TextView
