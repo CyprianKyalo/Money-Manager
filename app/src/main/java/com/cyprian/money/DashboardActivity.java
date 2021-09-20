@@ -3,24 +3,44 @@ package com.cyprian.money;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class DashboardActivity extends AppCompatActivity {
-    private ArrayList<Category> categoryArrayList;
-    private CategoryAdapter categoryAdapter;
     BottomNavigationView bottomNavigationView;
+
+    private DatabaseReference mIncome, mExpense;
+    private FirebaseAuth mAuth;
+    private TextView totalIncome;
+    private TextView totalExpense;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,46 +110,63 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-//        //Initializing the recycler view
-//        RecyclerView recyclerView = findViewById(R.id.dashboard_recyclerView);
-//        //setting the layout manager for the recycler view
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        //Initializing the array list that will contain the data
-//        categoryArrayList = new ArrayList<>();
-//        //Initializing the dailyAdapter
-//        categoryAdapter = new CategoryAdapter(this, categoryArrayList);
-//        //Setting the adapter
-//        recyclerView.setAdapter(categoryAdapter);
-//
-//        //Getting the data
-//        initializeData();
+        mAuth = FirebaseAuth.getInstance();
+        mIncome = FirebaseDatabase.getInstance().getReference().child("income").child(mAuth.getCurrentUser().getUid());
+        mExpense = FirebaseDatabase.getInstance().getReference().child("expense").child(mAuth.getCurrentUser().getUid());
+
+        totalIncome = findViewById(R.id.incTot);
+        totalExpense = findViewById(R.id.expTot);
     }
 
-//    private void initializeData() {
-//        //Getting the data created in strings.xml
-//        String[] categoryTitles = getResources().getStringArray(R.array.category_titles);
-//        String[] categoryAmounts = getResources().getStringArray(R.array.category_amounts);
-//
-//        //clearing existing data to avoid duplication
-//        categoryArrayList.clear();
-//
-//        for (int i = 0; i < categoryTitles.length; i++) {
-//            categoryArrayList.add(new Category(categoryTitles[i], categoryAmounts[i]));
-//        }
-//
-//        //Notify the adapter of the change in data set
-//        categoryAdapter.notifyDataSetChanged();
+    @Override
+    public void onStart() {
+        super.onStart();
 
-        //Floating Action Button
-//        FloatingActionButton fab = findViewById(R.id.fab_category);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//    }
+        Query incQuery = mIncome.orderByChild("income");
+
+        incQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int totAmt = 0;
+
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Map<String, Object> map = (Map<String, Object>) data.getValue();
+                    Object total = map.get("amount");
+                    int pTotal = Integer.parseInt(String.valueOf(total));
+                    totAmt += pTotal;
+                }
+                totalIncome.setText("Ksh. " + totAmt);
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        Query expQuery = mExpense.orderByChild("expense");
+        expQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
+                int totAmt = 0;
+
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Map<String, Object> map = (Map<String, Object>) data.getValue();
+                    Object total = map.get("expenseAmount");
+                    int pTotal = Integer.parseInt(String.valueOf(total));
+                    totAmt += pTotal;
+                }
+                totalExpense.setText("Ksh. " + totAmt);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

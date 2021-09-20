@@ -31,10 +31,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public class CategoryActivity extends AppCompatActivity {
-    private ArrayList<Category> categoryArrayList;
-    private CategoryAdapter categoryAdapter;
     BottomNavigationView bottomNavigationView;
-    RecyclerView recyclerView;
+    private RecyclerView crecyclerView;
 
     private DatabaseReference mCategories;
     private FirebaseAuth mAuth;
@@ -75,96 +73,54 @@ public class CategoryActivity extends AppCompatActivity {
             }
         });
 
+        mAuth = FirebaseAuth.getInstance();
+        mCategories = FirebaseDatabase.getInstance().getReference().child("categories").child(mAuth.getCurrentUser().getUid());
 
 
         //Initializing the recycler view
-        recyclerView = findViewById(R.id.recycler_category);
+        crecyclerView = findViewById(R.id.recycler_category);
         //setting the layout manager for the recycler view
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setReverseLayout(true);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        //Initializing the array list that will contain the data
-//        categoryArrayList = new ArrayList<>();
-//        //Initializing the dailyAdapter
-//        categoryAdapter = new CategoryAdapter(this, categoryArrayList);
-//        //Setting the adapter
-//        recyclerView.setAdapter(categoryAdapter);
-//
-//        //Getting the data
-//        initializeData();
-        mCategories = FirebaseDatabase.getInstance().getReference().child("categories");
-
-        mAuth = FirebaseAuth.getInstance();
-
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        crecyclerView.setHasFixedSize(true);
+        crecyclerView.setLayoutManager(linearLayoutManager);
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        if (currentUser != null) {
-            updateUI(currentUser);
-            adapter.startListening();
-        }
-    }
-
-    private void updateUI(final FirebaseUser currentUser) {
-        Query query = FirebaseDatabase.getInstance().getReference().child("categories");
-
-//        FirebaseRecyclerOptions<Category> options = new FirebaseRecyclerOptions.Builder<Category>()
-//                .setQuery(query, new SnapshotParser<Category>() {
-//                    @NonNull
-//                    @NotNull
-//                    @Override
-//                    public Category parseSnapshot(@NonNull @NotNull DataSnapshot snapshot) {
-//                        return new Category(snapshot.child("category_Title").getValue().toString());
-//                    }
-//                }).build();
 
         FirebaseRecyclerOptions<Category> options = new FirebaseRecyclerOptions.Builder<Category>()
                 .setQuery(mCategories, Category.class)
                 .build();
 
-        adapter = new FirebaseRecyclerAdapter<Category, CategoryViewHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull @NotNull CategoryViewHolder holder, int position, @NonNull @NotNull Category model) {
-                holder.setCategoryName(model.getCategory_Title());
-
-            }
-
+        FirebaseRecyclerAdapter<Category, CategoryActivity.CategoryViewHolder> adapter = new FirebaseRecyclerAdapter<Category, CategoryViewHolder>(options) {
             @NonNull
             @NotNull
             @Override
-            public CategoryViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+            public CategoryActivity.CategoryViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_list_items, null);
-                return new CategoryViewHolder(view);
+                return new CategoryActivity.CategoryViewHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull @NotNull CategoryActivity.CategoryViewHolder holder, int position, @NonNull @NotNull Category model) {
+                holder.setCategoryName(model.getCategory_Title());
             }
         };
 
-        recyclerView.setAdapter(adapter);
+        crecyclerView.setAdapter(adapter);
+        adapter.startListening();
         adapter.notifyDataSetChanged();
     }
 
     public class CategoryViewHolder extends RecyclerView.ViewHolder{
-        private TextView categoryName;
-
-        String currentUserID;
-        FirebaseAuth mAuth;
-        DatabaseReference mCategories;
         View mview;
 
         public CategoryViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
-//            categoryName = itemView.findViewById(R.id.input_category);
-
-//            mCategories = FirebaseDatabase.getInstance().getReference().child("categories");
             mview = itemView;
         }
 

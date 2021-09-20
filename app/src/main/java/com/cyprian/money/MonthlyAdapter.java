@@ -12,13 +12,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeeklyAdapter extends RecyclerView.Adapter<WeeklyAdapter.myViewHolder>{
+public class MonthlyAdapter extends RecyclerView.Adapter<MonthlyAdapter.myViewHolder>{
 
     private Context mContext;
     private List<Integer> myDataList;
-    private ArrayList<Integer> dateList;
+    private ArrayList<String> dateList;
 
-    public WeeklyAdapter(Context mContext, ArrayList<Integer> myDataList, ArrayList<Integer> dateList) {
+    public MonthlyAdapter(Context mContext, ArrayList<Integer> myDataList, ArrayList<String> dateList) {
         this.mContext = mContext;
         this.myDataList = (List<Integer>) myDataList;
         this.dateList = dateList;
@@ -30,16 +30,16 @@ public class WeeklyAdapter extends RecyclerView.Adapter<WeeklyAdapter.myViewHold
     public myViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.weekly_list_view, null);
 
-        return new WeeklyAdapter.myViewHolder(view);
+        return new MonthlyAdapter.myViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull myViewHolder holder, int position) {
         Integer expense = myDataList.get(position);
-        Integer expDate = dateList.get(position);
+        String exp = dateList.get(position);
 
-        holder.setWeeklyAmount("Ksh. "+expense);
-        holder.setWeeklyDate("Week "+expDate);
+        holder.setMontlyAmount("Ksh. "+expense);
+        holder.setMonthlyDate(""+exp);
 
     }
 
@@ -56,12 +56,12 @@ public class WeeklyAdapter extends RecyclerView.Adapter<WeeklyAdapter.myViewHold
             mview = itemView;
         }
 
-        private void setWeeklyDate(String expTitle) {
+        private void setMonthlyDate(String expTitle) {
             TextView mWeek = mview.findViewById(R.id.weekly_date);
             mWeek.setText(expTitle);
         }
 
-        private void setWeeklyAmount(String spend) {
+        private void setMontlyAmount(String spend) {
             TextView mspend = mview.findViewById(R.id.week_spend);
             mspend.setText(spend);
         }

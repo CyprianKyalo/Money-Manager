@@ -51,12 +51,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             categoryTitle = itemView.findViewById(R.id.category_title);
-            categoryAmt = itemView.findViewById(R.id.category_amt);
         }
 
         public void bindTo(Category currCategory) {
             categoryTitle.setText(currCategory.getCategory_Title());
-            categoryAmt.setText(currCategory.getCategory_amt());
         }
     }
 }
