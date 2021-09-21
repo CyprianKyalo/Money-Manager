@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MoneyManager.NoActionBar">
-        <activity android:name="com.cyprian.money.RegisterActivity"></activity>
-        <activity android:name="com.cyprian.money.SplashActivity" />
+        <activity android:name=".EditDailyExpenseActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".SplashActivity" />
         <activity
-            android:name="com.cyprian.money.LoginActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,13 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.cyprian.money.AddCategoryActivity" />
-        <activity android:name="com.cyprian.money.MainActivity" />
-        <activity android:name="com.cyprian.money.IncomeExpenseActivity" />
-        <activity android:name="com.cyprian.money.CategoryActivity" />
-        <activity android:name="com.cyprian.money.IncomeActivity" />
+        <activity android:name=".AddCategoryActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".IncomeExpenseActivity" />
+        <activity android:name=".CategoryActivity" />
+        <activity android:name=".IncomeActivity" />
         <activity
-            android:name="com.cyprian.money.DashboardActivity"
+            android:name=".DashboardActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.MoneyManager.NoActionBar" />
     </application>

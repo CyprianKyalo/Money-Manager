@@ -9,7 +9,7 @@
     android:layout_marginVertical="8dp"
     android:layout_marginHorizontal="16dp"
     app:cardCornerRadius="8dp"
-    >
+    android:id="@+id/daily_card">
 
     <RelativeLayout
         android:id="@+id/daily_list"
