@@ -11,10 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@color/white"
-        app:titleTextColor="#6c2488"
+        android:background="@color/app_theme"
+        app:titleTextColor="@color/black"
         app:title="Categories"
-        app:collapseIcon="@color/icon_color"
+        app:collapseIcon="@color/black"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
@@ -25,11 +25,11 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
-        app:itemIconTint="@color/icon_color"
-        app:itemTextColor="@color/icon_color"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
         app:menu="@menu/nav_bottom"
         android:elevation="20dp"
-        android:background="@color/white">
+        android:background="@color/app_theme">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
@@ -38,7 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/bottom_nav"
-        android:layout_below="@id/tool_bar"/>
+        android:layout_below="@id/tool_bar"
+        android:layout_marginTop="10dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_category"
@@ -48,12 +49,11 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="5dp"
-        android:background="@color/icon_color"
-        android:backgroundTint="@color/icon_color"
+        android:backgroundTint="@color/app_theme"
         android:onClick="fab_cat"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="10dp"
         android:src="@drawable/ic_add"
-        android:tint="@color/white"
-        app:backgroundTint="@color/white"
-        app:rippleColor="@color/white" />
+        app:rippleColor="@color/app_theme" />
 
 </RelativeLayout>

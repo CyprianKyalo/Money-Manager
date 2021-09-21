@@ -9,12 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@color/white"
+        android:background="@color/app_theme"
+        app:titleTextColor="@color/black"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        app:collapseIcon="@color/icon_color"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:titleTextColor="#6c2488" />
+        app:collapseIcon="@color/black"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/income_expense_cardView"
@@ -38,7 +38,7 @@
                 android:minHeight="20sp"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:tabSelectedTextColor="#3f194e"
-                app:tabTextColor="@color/icon_color" />
+                app:tabTextColor="@color/black" />
 
 
             <androidx.viewpager.widget.ViewPager
@@ -50,18 +50,5 @@
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
-
-<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--        android:id="@+id/bottom_nav"-->
-
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="48dp"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        app:itemIconTint="@android:color/white"-->
-<!--        app:itemTextColor="@android:color/white"-->
-<!--        app:menu="@menu/nav_bottom"-->
-<!--        android:background="@android:color/holo_blue_light">-->
-
-<!--    </com.google.android.material.bottomnavigation.BottomNavigationView>-->
 
 </RelativeLayout>

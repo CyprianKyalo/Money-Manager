@@ -12,13 +12,15 @@
         android:layout_centerHorizontal="true"
         android:text="@string/monthly_expenses"
         android:layout_marginTop="13dp"
+        android:textColor="@color/black"
         android:textStyle="bold"
-        android:textSize="16sp"/>
+        android:textSize="18sp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_monthly"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/monthly_intro"/>
+        android:layout_below="@id/monthly_intro"
+        android:layout_marginTop="10dp"/>
 
 </RelativeLayout>

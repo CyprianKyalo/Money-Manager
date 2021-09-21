@@ -23,7 +23,7 @@
             android:paddingStart="8dp"
             android:paddingLeft="8dp"
             android:text="Shopping"
-            android:textColor="#4b0e60"
+            android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="normal" />
 

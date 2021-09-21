@@ -20,13 +20,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2021.07.8 - 2021.07.1"
-            android:textSize="15sp"/>
+            android:textColor="@color/black"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/spend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Spend"
+            android:text="Spent"
+            android:textColor="@color/black"
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"
             android:textSize="15sp"/>
@@ -37,10 +39,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="Ksh. 3000"
+            android:textStyle="bold"
+            android:textSize="13sp"
             android:layout_below="@id/spend"
             android:layout_marginTop="5dp"
             android:layout_marginRight="23dp"
-            android:textColor="#ff0000"/>
+            android:textColor="@android:color/holo_red_dark"/>
 
 
     </RelativeLayout>
