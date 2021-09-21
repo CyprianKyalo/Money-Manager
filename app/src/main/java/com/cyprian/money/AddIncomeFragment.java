@@ -51,7 +51,7 @@ public class AddIncomeFragment extends Fragment {
 
         incomeName = rootView.findViewById(R.id.income_name);
         amount = rootView.findViewById(R.id.incomeAmount);
-        sendIncome = rootView.findViewById(R.id.button_add_income);
+        sendIncome = rootView.findViewById(R.id.btn_add_income);
 
         sendIncome.setOnClickListener(new View.OnClickListener() {
             @Override
