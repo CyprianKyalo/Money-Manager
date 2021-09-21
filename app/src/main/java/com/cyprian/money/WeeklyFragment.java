@@ -47,7 +47,8 @@ public class WeeklyFragment extends Fragment {
 
     private Integer key_amt, value_amt;
     HashMap hashMap = new HashMap();
-    private ArrayList<Integer> weeklyData, weeklyDate;
+    private ArrayList<Integer> weeklyData;
+    private ArrayList<String> weeklyDate;
     private ArrayList<Integer> weeklyAmts;
 
 
@@ -70,7 +71,7 @@ public class WeeklyFragment extends Fragment {
         weeklyRecyclerView.setLayoutManager(linearLayoutManager);
 
         weeklyData = new ArrayList<Integer>();
-        weeklyDate = new ArrayList<Integer>();
+        weeklyDate = new ArrayList<String>();
 
         weeklyAdapter = new WeeklyAdapter(getContext(), weeklyData, weeklyDate);
         weeklyRecyclerView.setAdapter(weeklyAdapter);
@@ -117,32 +118,32 @@ public class WeeklyFragment extends Fragment {
                         int pTotal = Integer.parseInt(String.valueOf(objAmt));
 
                         totamt += pTotal;
-                        hashMap.put(week, totamt);
+                        hashMap.put("2021.09.19 - 2021.09.25", totamt);
                     } else if (week == 38) {
                         Object objamt = map.get("expenseAmount");
                         int Total = Integer.parseInt(String.valueOf(objamt));
 
                         totAmt += Total;
-                        hashMap.put(week, totAmt);
+                        hashMap.put("2021.09.12 - 2021.09.18", totAmt);
                     }
                 }
 
-                for ( Object key : hashMap.keySet() ) {
-                    System.out.println("The keys hare: "+key );
-                }
-
-                for (Object key : hashMap.keySet()) {
-                    System.out.println("The keys from Bind are: "+key);
-                    key_amt = (Integer) key;
-                    value_amt = (Integer) hashMap.get(key);
-
-                }
-
-                for (int i = 0; i < hashMap.size(); i++) {
-                    System.out.println("Hashmap keys are: "+hashMap);
-
-                    System.out.println("Hashmap vals are: "+hashMap.get(i));
-                }
+//                for ( Object key : hashMap.keySet() ) {
+//                    System.out.println("The keys hare: "+key );
+//                }
+//
+//                for (Object key : hashMap.keySet()) {
+//                    System.out.println("The keys from Bind are: "+key);
+//                    key_amt = (Integer) key;
+//                    value_amt = (Integer) hashMap.get(key);
+//
+//                }
+//
+//                for (int i = 0; i < hashMap.size(); i++) {
+//                    System.out.println("Hashmap keys are: "+hashMap);
+//
+//                    System.out.println("Hashmap vals are: "+hashMap.get(i));
+//                }
 
                 List<Integer> list = new ArrayList<Integer>(hashMap.values()); //Most likely dataSnapshot.getValues()
 
@@ -151,7 +152,7 @@ public class WeeklyFragment extends Fragment {
 
                 for (Object key : hashMap.keySet()) {
                     System.out.println("The keys from Bind are: "+key);
-                    weeklyDate.add((Integer) key);
+                    weeklyDate.add((String) key);
 
                 }
 

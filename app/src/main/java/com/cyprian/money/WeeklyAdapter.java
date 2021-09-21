@@ -16,9 +16,9 @@ public class WeeklyAdapter extends RecyclerView.Adapter<WeeklyAdapter.myViewHold
 
     private Context mContext;
     private List<Integer> myDataList;
-    private ArrayList<Integer> dateList;
+    private ArrayList<String> dateList;
 
-    public WeeklyAdapter(Context mContext, ArrayList<Integer> myDataList, ArrayList<Integer> dateList) {
+    public WeeklyAdapter(Context mContext, ArrayList<Integer> myDataList, ArrayList<String> dateList) {
         this.mContext = mContext;
         this.myDataList = (List<Integer>) myDataList;
         this.dateList = dateList;
@@ -36,10 +36,10 @@ public class WeeklyAdapter extends RecyclerView.Adapter<WeeklyAdapter.myViewHold
     @Override
     public void onBindViewHolder(@NonNull @NotNull myViewHolder holder, int position) {
         Integer expense = myDataList.get(position);
-        Integer expDate = dateList.get(position);
+        String expDate = dateList.get(position);
 
         holder.setWeeklyAmount("Ksh. "+expense);
-        holder.setWeeklyDate("Week "+expDate);
+        holder.setWeeklyDate(expDate);
 
     }
 
