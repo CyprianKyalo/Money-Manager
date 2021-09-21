@@ -2,10 +2,12 @@ package com.cyprian.money;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,6 +38,8 @@ public class EditDailyExpenseActivity extends AppCompatActivity {
     public static String categoryItem;
     String exp_ID = null;
 
+    BottomNavigationView bottomNavigationView;
+
     private DatabaseReference mDatabase, categoryRef;
     private FirebaseAuth mAuth;
     private ProgressDialog loader;
@@ -43,6 +48,36 @@ public class EditDailyExpenseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_daily_expense);
+
+        Toolbar toolbar = findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+
+        bottomNavigationView = findViewById(R.id.bottom_nav);
+
+        bottomNavigationView.setSelectedItemId(R.id.categories);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+                int id = item.getItemId();
+
+                switch (id) {
+                    case R.id.dashboard:
+                        Intent intent2 = new Intent(EditDailyExpenseActivity.this, DashboardActivity.class);
+                        startActivity(intent2);
+                        break;
+                    case R.id.expense:
+                        Intent intent = new Intent(EditDailyExpenseActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.income:
+                        Intent intent1 = new Intent(EditDailyExpenseActivity.this, IncomeActivity.class);
+                        startActivity(intent1);
+                        break;
+                }
+                return false;
+            }
+        });
 
         loader = new ProgressDialog(this);
 
@@ -96,10 +131,6 @@ public class EditDailyExpenseActivity extends AppCompatActivity {
                 String titleExp = (String) snapshot.child("expenseTitle").getValue();
                 String noteExp = (String) snapshot.child("expenseNote").getValue();
                 String expAmt = (String) snapshot.child("expenseAmount").getValue();
-
-                System.out.println("The title is "+titleExp);
-                System.out.println("The note is "+noteExp);
-                System.out.println("The Amount is "+expAmt);
 
                 TitleExp.setText(titleExp);
                 NoteExp.setText(noteExp);
