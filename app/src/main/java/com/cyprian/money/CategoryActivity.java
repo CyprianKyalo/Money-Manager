@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -180,11 +181,13 @@ public class CategoryActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        if (id == R.id.income) {
-            return true;
+        if (id == R.id.action_help) {
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:12345678"));
+            startActivity(intent);
+        } else if (id == R.id.log_out) {
+            mAuth.signOut();
+            Intent intent = new Intent(CategoryActivity.this, LoginActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

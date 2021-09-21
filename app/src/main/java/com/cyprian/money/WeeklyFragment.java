@@ -128,7 +128,6 @@ public class WeeklyFragment extends Fragment {
                     }
                 }
 
-
                 List<Integer> list = new ArrayList<Integer>(hashMap.values()); //Most likely dataSnapshot.getValues()
 
                 weeklyData.clear();

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -93,18 +94,6 @@ public class IncomeActivity extends AppCompatActivity {
         linearLayoutManager.setReverseLayout(true);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        //Initializing the array list that will contain the data
-//        incomeArrayList = new ArrayList<>();
-//        //Initializing the dailyAdapter
-//        incomeAdapter = new IncomeAdapter(this, incomeArrayList);
-//        //Setting the adapter
-//        recyclerView.setAdapter(incomeAdapter);
-
-        //Getting the data
-
-
     }
 
     @Override
@@ -208,11 +197,13 @@ public class IncomeActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        if (id == R.id.income) {
-            return true;
+        if (id == R.id.action_help) {
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:12345678"));
+            startActivity(intent);
+        } else if (id == R.id.log_out) {
+            mAuth.signOut();
+            Intent intent = new Intent(IncomeActivity.this, LoginActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
