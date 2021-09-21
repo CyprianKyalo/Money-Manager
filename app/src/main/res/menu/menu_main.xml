@@ -4,13 +4,6 @@
     tools:context="com.cyprian.money.MainActivity">
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        android:icon="@drawable/ic_settings"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/action_help"
         android:orderInCategory="100"
         android:title="@string/help"
@@ -18,9 +11,9 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/actions_logout"
+        android:id="@+id/log_out"
         android:orderInCategory="100"
         android:title="Logout"
-        app:showAsAction="never"/>
-
+        android:icon="@drawable/ic_help"
+        app:showAsAction="never" />
 </menu>

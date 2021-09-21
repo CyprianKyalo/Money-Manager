@@ -50,24 +50,24 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/inco"
+                android:id="@+id/exp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
-                android:text="Income"
+                android:text="Expenses"
                 android:textColor="@android:color/black"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textSize="18dp" />
 
             <TextView
-                android:id="@+id/incTot"
+                android:id="@+id/expTot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/inco"
+                android:layout_below="@id/exp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:text="Ksh. 100"
+                android:text="Ksh. 0"
                 android:textColor="@android:color/black" />
         </RelativeLayout>
 
@@ -92,24 +92,24 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/exp"
+                android:id="@+id/bal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
-                android:text="Expense"
+                android:text="Balance"
                 android:textColor="@android:color/black"
                 android:textSize="18dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/expTot"
+                android:id="@+id/balTot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/exp"
+                android:layout_below="@id/bal"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:text="Ksh. 100"
+                android:text="Ksh. 0"
                 android:textColor="@android:color/black" />
         </RelativeLayout>
 

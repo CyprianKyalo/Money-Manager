@@ -8,7 +8,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,10 +39,12 @@ import java.util.Map;
 public class DashboardActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
 
-    private DatabaseReference mIncome, mExpense;
+    private DatabaseReference mIncome, mExpense, mBalance;
     private FirebaseAuth mAuth;
-    private TextView totalIncome;
+    private TextView totalBalance;
     private TextView totalExpense;
+
+    String incKey, expKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,8 +117,9 @@ public class DashboardActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mIncome = FirebaseDatabase.getInstance().getReference().child("income").child(mAuth.getCurrentUser().getUid());
         mExpense = FirebaseDatabase.getInstance().getReference().child("expense").child(mAuth.getCurrentUser().getUid());
+        mBalance = FirebaseDatabase.getInstance().getReference();
 
-        totalIncome = findViewById(R.id.incTot);
+        totalBalance = findViewById(R.id.balTot);
         totalExpense = findViewById(R.id.expTot);
     }
 
@@ -124,18 +129,17 @@ public class DashboardActivity extends AppCompatActivity {
 
         Query incQuery = mIncome.orderByChild("income");
 
+        final int[] totIncome = {0};
         incQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int totAmt = 0;
 
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Map<String, Object> map = (Map<String, Object>) data.getValue();
                     Object total = map.get("amount");
                     int pTotal = Integer.parseInt(String.valueOf(total));
-                    totAmt += pTotal;
+                    totIncome[0] += pTotal;
                 }
-                totalIncome.setText("Ksh. " + totAmt);
             }
 
 
@@ -145,19 +149,21 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+        final int[] totExpense = {0};
         Query expQuery = mExpense.orderByChild("expense");
         expQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot dataSnapshot) {
-                int totAmt = 0;
+
 
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Map<String, Object> map = (Map<String, Object>) data.getValue();
                     Object total = map.get("expenseAmount");
                     int pTotal = Integer.parseInt(String.valueOf(total));
-                    totAmt += pTotal;
+                    totExpense[0] += pTotal;
                 }
-                totalExpense.setText("Ksh. " + totAmt);
+                totalExpense.setText("Ksh. " + totExpense[0]);
+                totalBalance.setText("Ksh. "+(totIncome[0]-totExpense[0]));
             }
 
             @Override
@@ -183,11 +189,13 @@ public class DashboardActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        if (id == R.id.income) {
-            return true;
+        if (id == R.id.action_help) {
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:12345678"));
+            startActivity(intent);
+        } else if (id == R.id.log_out) {
+            mAuth.signOut();
+            Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
