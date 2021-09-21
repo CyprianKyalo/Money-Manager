@@ -128,23 +128,6 @@ public class WeeklyFragment extends Fragment {
                     }
                 }
 
-//                for ( Object key : hashMap.keySet() ) {
-//                    System.out.println("The keys hare: "+key );
-//                }
-//
-//                for (Object key : hashMap.keySet()) {
-//                    System.out.println("The keys from Bind are: "+key);
-//                    key_amt = (Integer) key;
-//                    value_amt = (Integer) hashMap.get(key);
-//
-//                }
-//
-//                for (int i = 0; i < hashMap.size(); i++) {
-//                    System.out.println("Hashmap keys are: "+hashMap);
-//
-//                    System.out.println("Hashmap vals are: "+hashMap.get(i));
-//                }
-
                 List<Integer> list = new ArrayList<Integer>(hashMap.values()); //Most likely dataSnapshot.getValues()
 
                 weeklyData.clear();

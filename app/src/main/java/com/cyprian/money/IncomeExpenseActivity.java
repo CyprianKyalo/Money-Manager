@@ -167,8 +167,4 @@ public class IncomeExpenseActivity extends AppCompatActivity {
             });
         }
     }
-
-//    public void save(View view) {
-//        Toast.makeText(getApplicationContext(), "I was clicked", Toast.LENGTH_SHORT).show();
-//    }
 }
