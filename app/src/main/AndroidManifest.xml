@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MoneyManager.NoActionBar">
-        <activity android:name=".EditDailyExpenseActivity"></activity>
+        <activity android:name=".EditIncomeActivity"></activity>
+        <activity android:name=".EditCategoryActivity" />
+        <activity android:name=".EditDailyExpenseActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".SplashActivity" />
         <activity

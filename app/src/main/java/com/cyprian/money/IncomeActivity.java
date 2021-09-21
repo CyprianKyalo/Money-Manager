@@ -3,6 +3,7 @@ package com.cyprian.money;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -117,6 +119,42 @@ public class IncomeActivity extends AppCompatActivity {
                 holder.setIncomeAmt("Ksh. " + model.getAmount());
             }
         };
+
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.RIGHT|ItemTouchHelper.LEFT|ItemTouchHelper.DOWN|ItemTouchHelper.UP, ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull @NotNull RecyclerView recyclerView, @NonNull @NotNull RecyclerView.ViewHolder viewHolder, @NonNull @NotNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull @NotNull RecyclerView.ViewHolder viewHolder, int direction) {
+                Toast.makeText(IncomeActivity.this, "Item removed successfully", Toast.LENGTH_SHORT).show();
+
+                adapter.getSnapshots().getSnapshot(viewHolder.getAdapterPosition()).getRef().removeValue();
+                adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+            }
+        });
+        helper.attachToRecyclerView(recyclerView);
+
+        ItemTouchHelper helperEdit = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.RIGHT|ItemTouchHelper.LEFT|ItemTouchHelper.DOWN|ItemTouchHelper.UP, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull @NotNull RecyclerView recyclerView, @NonNull @NotNull RecyclerView.ViewHolder viewHolder, @NonNull @NotNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull @NotNull RecyclerView.ViewHolder viewHolder, int direction) {
+                Intent intent = new Intent(IncomeActivity.this, EditIncomeActivity.class);
+
+                final String eID = adapter.getRef(viewHolder.getAdapterPosition()).getKey();
+
+                intent.putExtra("incomeID", eID);
+                startActivity(intent);
+                Toast.makeText(IncomeActivity.this, "Item to edit", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        helperEdit.attachToRecyclerView(recyclerView);
 
         recyclerView.setAdapter(adapter);
         adapter.startListening();
