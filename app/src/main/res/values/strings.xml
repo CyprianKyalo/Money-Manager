@@ -72,11 +72,6 @@
         <item>Side Hustle</item>
     </string-array>
 
-    <string-array name="income_amounts">
-        <item>Ksh. 200000</item>
-        <item>Ksh. 10000</item>
-    </string-array>
-
     <string-array name="category_titles">
         <item>Shopping</item>
         <item>Photography</item>
@@ -101,9 +96,15 @@
         <item>Ksh. 400</item>
     </string-array>
 
+    <string-array name="spinner_label">
+        <item>Shopping</item>
+        <item>Books</item>
+    </string-array>
+
     <string name="title_activity_landing">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="help">Help</string>
 
 </resources>
