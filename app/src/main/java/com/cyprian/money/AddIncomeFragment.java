@@ -82,7 +82,7 @@ public class AddIncomeFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull @NotNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(getContext(), "IIncome Added", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Income Added", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getContext(), IncomeActivity.class);
                                 startActivity(intent);
                             } else{

@@ -86,7 +86,7 @@ public class EditIncomeActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(EditIncomeActivity.this, "Expense Updated", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditIncomeActivity.this, "Income Updated", Toast.LENGTH_SHORT).show();
 
                             Intent intent = new Intent(EditIncomeActivity.this, IncomeActivity.class);
                             startActivity(intent);

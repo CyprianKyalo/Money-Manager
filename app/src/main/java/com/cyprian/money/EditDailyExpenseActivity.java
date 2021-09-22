@@ -42,8 +42,6 @@ public class EditDailyExpenseActivity extends AppCompatActivity {
     public static String categoryItem;
     String exp_ID = null;
 
-    BottomNavigationView bottomNavigationView;
-
     private DatabaseReference mDatabase, categoryRef;
     private FirebaseAuth mAuth;
     private ProgressDialog loader;
@@ -55,34 +53,7 @@ public class EditDailyExpenseActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-
-        bottomNavigationView = findViewById(R.id.bottom_nav);
-
-        bottomNavigationView.setSelectedItemId(R.id.categories);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-                int id = item.getItemId();
-
-                switch (id) {
-                    case R.id.dashboard:
-                        Intent intent2 = new Intent(EditDailyExpenseActivity.this, DashboardActivity.class);
-                        startActivity(intent2);
-                        break;
-                    case R.id.expense:
-                        Intent intent = new Intent(EditDailyExpenseActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        break;
-
-                    case R.id.income:
-                        Intent intent1 = new Intent(EditDailyExpenseActivity.this, IncomeActivity.class);
-                        startActivity(intent1);
-                        break;
-                }
-                return false;
-            }
-        });
-
+        
         loader = new ProgressDialog(this);
 
         TitleExp = findViewById(R.id.title_expense);

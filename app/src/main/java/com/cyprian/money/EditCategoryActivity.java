@@ -83,7 +83,7 @@ public class EditCategoryActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(EditCategoryActivity.this, "Expense Updated", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditCategoryActivity.this, "Category Updated", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(EditCategoryActivity.this, CategoryActivity.class);
                             startActivity(intent);
                         } else{

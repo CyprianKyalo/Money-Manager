@@ -121,7 +121,7 @@ public class CategoryActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull @NotNull RecyclerView.ViewHolder viewHolder, int direction) {
-                Toast.makeText(CategoryActivity.this, "Item removed successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CategoryActivity.this, "Income removed successfully", Toast.LENGTH_SHORT).show();
 
                 adapter.getSnapshots().getSnapshot(viewHolder.getAdapterPosition()).getRef().removeValue();
                 adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
