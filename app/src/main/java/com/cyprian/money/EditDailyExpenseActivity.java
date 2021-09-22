@@ -53,7 +53,7 @@ public class EditDailyExpenseActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-        
+
         loader = new ProgressDialog(this);
 
         TitleExp = findViewById(R.id.title_expense);
